@@ -1,7 +1,7 @@
 {
-  "name": "refer",
+  "name": "ballot-cordova",
   "version": "1.0.0",
-  "description": "refer: An Ionic project",
+  "description": "Ballot Cordova",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
