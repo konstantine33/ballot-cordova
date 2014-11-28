@@ -15,10 +15,10 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-    <!-- my app's css -->
+    <!-- Ballot CSS -->
     <link href="css/main.css" rel="stylesheet">
 
-    <!-- your app's js -->
+    <!-- Ballot JS -->
     <script src="lib/moment/min/moment.min.js"></script>
     <script src="lib/angular-moment/angular-moment.min.js"></script>
     <script src="app/main.module.js"></script>
@@ -28,17 +28,19 @@
     <script src="app/auth/services/BallotToken.js"></script>
     <script src="app/auth/controllers/authController.js"></script>
 
-    <script src="app/ballot-view/ballotViewController.js"></script>
-
-    <script src="app/create-ballot/createBallotController.js"></script>
 
     <script src="app/models/Ballot.js"></script>
     <script src="app/models/APIQuery.js"></script>
-
-    <script src="app/my-ballots/myBallotsController.js"></script>
-
     <script src="app/utilities/services/BallotError.js"></script>
     <script src="app/utilities/directives/ballotForm.js"></script>
+
+    <!-- Page Controllers -->
+    <script src="app/ballot-view/ballotViewController.js"></script>
+    <script src="app/create-ballot/createBallotController.js"></script>
+    <script src="app/my-ballots/myBallotsController.js"></script>
+    <script src="app/results/resultsController.js"></script>
+    <script src="app/vote/voteController.js"></script>
+
 
 </head>
 <body ng-app="starter" ng-controller="appController">
@@ -58,7 +60,7 @@
         <ion-content>
             <ul class="list">
                 <a class="item" ui-sref="vote" menu-close>Vote</a>
-                <a class="item" ui-sref="create_ballot" menu-close>Create a Ballot</a>
+                <a class="item" ui-sref="create_ballot" menu-close>Ask a Question</a>
                 <a class="item" ui-sref="my_ballots" menu-close>My Ballots</a>
                 <a class="item" ui-sref="results" menu-close>Ballot Results</a>
             </ul>

@@ -46,7 +46,8 @@ var BallotApp = angular.module('starter', ['ionic', 'angularMoment'])
             })
             .state('vote', {
                 url: "/vote",
-                template: "<ion-view><ion-content>VOTE</ion-content></ion-view>"
+                templateUrl: 'app/vote/vote.html',
+                controller: 'voteController'
             })
             .state('create_ballot', {
                 url: "/create-ballot",
@@ -60,7 +61,8 @@ var BallotApp = angular.module('starter', ['ionic', 'angularMoment'])
             })
             .state('results', {
                 url: "/results",
-                template: "<ion-view><ion-content>Ballot Results Summary</ion-content></ion-view>"
+                templateUrl: 'app/results/results.html',
+                controller: "resultsController"
             })
             .state('ballot', {
                 url: "/ballot/:ballot_id",
@@ -71,7 +73,7 @@ var BallotApp = angular.module('starter', ['ionic', 'angularMoment'])
                         return Ballot.findById($stateParams.ballot_id)
                     }
                 }
-            })
+            });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/auth');
 

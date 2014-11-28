@@ -1,0 +1,9 @@
+<ion-view title="Ballot Results">
+    <ion-content>
+        <ul class="list">
+            <a class="item" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId()})">
+                {{ballot.get('question')}}
+            </a>
+        </ul>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,9 @@
+<ion-view title="Vote">
+    <ion-content>
+        {{ballot.get('question')}}
+
+        <button class="button button-positive" ng-click="respond(responseType.YES)">Yes</button>
+        <button class="button button-assertive" ng-click="respond(responseType.NO)">No</button>
+        <button class="button button-stable" ng-click="respond(responseType.SKIP)">skip</button>
+    </ion-content>
+</ion-view>

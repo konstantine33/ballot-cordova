@@ -1,6 +1,6 @@
-BallotApp.controller('myBallotsController', function($scope, Ballot){
+BallotApp.controller('resultsController', function($scope, Ballot){
     $scope.ballots = [];
-    var query = Ballot.queryOwn();
+    var query = Ballot.queryResponded();
 
     $scope.getMore = function(){
         query.next()
