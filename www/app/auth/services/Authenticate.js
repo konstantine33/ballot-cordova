@@ -1,4 +1,4 @@
-BallotApp.factory('Authenticate', function ($q, $http, $window, BallotError, SERVER_URL, $rootScope) {
+BallotApp.factory('Authenticate', function ($q, $http, $window, BallotError, SERVER_URL, BallotToken) {
     function authenticate() {
         var deferred = $q.defer();
 
@@ -12,16 +12,17 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, BallotError, SER
         }
 
         $http.post(SERVER_URL + '/auth', {authenticator: authenticator})
-            .success(function (user) {
-                $rootScope.user = user;
-                deferred.resolve(user)
+            .success(function (data) {
+                BallotToken.store(data.token);
+                deferred.resolve()
             })
             .error(function (error) {
+                BallotToken.del();
                 BallotError(error, {deferred: deferred});
             });
 
         return deferred.promise;
     }
 
-    return authenticate;
+    return authenticate
 });
