@@ -1,0 +1,12 @@
+<ion-view title="">
+    <ion-content>
+        <h2>Question:</h2>
+        <p>{{ballot.get('question')}}</p>
+
+        <div ng-show="ballot.get('end_time')">
+            <h4>End Time</h4>
+            <p>{{ballot.get('end_time')}}</p>
+        </div>
+
+    </ion-content>
+</ion-view>

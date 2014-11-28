@@ -52,8 +52,8 @@ BallotApp.controller('createBallotController', function($scope, Ballot, $window,
         }
 
 
-        Ballot.create(data).then(function(){
-            $state.go('vote')
+        Ballot.create(data).then(function(b){
+            $state.go('ballot', {ballot_id: b.getId()})
         }, function(e){
             BallotError(e)
         })

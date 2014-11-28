@@ -8,6 +8,10 @@ BallotApp.factory('Ballot', function(SERVER_URL, $http, $q, APIQuery){
         return this.data[key]
     };
 
+    Ballot.prototype.getId = function(){
+        return this.data._id
+    };
+
     Ballot.prototype.close = function(){
         return $http.post(this.url, {closed: true}).then(function(response){return response.data})
     };
@@ -49,12 +53,9 @@ BallotApp.factory('Ballot', function(SERVER_URL, $http, $q, APIQuery){
 
     //Responds with a promise that resolves to the model
     Ballot.findById = function(id){
-        return Ballot.queryOwn({
-            query_type: "findOne",
-            params: {
-                _id: id
-            }
-        }).next()
+        return $http.get(Ballot.url + "/" + id).then(function(result){
+            return new Ballot(result.data)
+        })
     };
 
     Ballot.recommend = function(){
