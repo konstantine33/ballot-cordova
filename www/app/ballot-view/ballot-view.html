@@ -11,5 +11,8 @@
         <p>YES: {{ballot.get('yes_count')}}</p>
         <p>NO: {{ballot.get('no_count')}}</p>
         <p>SKIP: {{ballot.get('skip_count')}}</p>
+
+        <button class="button button-positive" ng-click="action()">{{action_button}}</button>
+
     </ion-content>
 </ion-view>

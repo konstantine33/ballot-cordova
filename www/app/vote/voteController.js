@@ -8,7 +8,7 @@ BallotApp.controller('voteController', function ($scope, Ballot, $state) {
     $scope.respond = function (response) {
         $scope.ballot.respond(response)
             .then(function () {
-                $state.go('ballot', {ballot_id: $scope.ballot.getId()})
+                $state.go('ballot', {ballot_id: $scope.ballot.getId(), action: "vote"})
             })
     }
 });

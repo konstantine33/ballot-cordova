@@ -1,15 +1,17 @@
 <ion-view title="Ask a Question">
     <ion-content>
-        <div class="list">
-            <div class="bar bar-header bar-assertive item" ng-show="form_data.error">
-                <h2 class="title">{{form_data.error}}</h2>
-            </div>
-            <label class="item item-input">
-                <textarea b-maxlength="maxQuestionLength" ng-model="form_data.question" placeholder='Enter Your Question - Make sure to phrase it as a "Yes/No" question.'></textarea>
-            </label>
-            <p class="text-right text-muted">{{maxQuestionLength - form_data.question.length}}</p>
-
+        <div class="bar bar-header bar-assertive item" ng-show="form_data.error">
+            <h2 class="title">{{form_data.error}}</h2>
         </div>
+        <div class="item item-divider">
+            Question
+        </div>
+        <label class="item item-input">
+            <textarea b-maxlength="maxQuestionLength" ng-model="form_data.question"
+                      placeholder='Enter Your Question - Make sure to phrase it as a "Yes/No" question.'></textarea>
+        </label>
+
+        <p class="text-right text-muted">{{maxQuestionLength - form_data.question.length}}</p>
 
         <div class="list">
             <div class="item item-divider">
@@ -17,6 +19,7 @@
             </div>
             <label class="item item-radio" ng-repeat="opt in close_options">
                 <input type="radio" name="group" ng-value="opt.value" ng-model="form_data.close_opt">
+
                 <div class="item-content">
                     {{opt.title}}
                 </div>
