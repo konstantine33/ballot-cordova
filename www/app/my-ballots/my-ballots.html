@@ -1,7 +1,7 @@
 <ion-view title="My Ballots">
     <ion-content>
         <ul class="list">
-            <a class="item item-button-right" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId()})">
+            <a class="item item-button-right" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId(), owns: true})">
                 <button class="button button-assertive button-clear" ng-show="!ballot.get('closed')" ng-click="confirmClose($event, ballot)">Close</button>
                 {{ballot.get('question')}}
                 <p class="text-muted">Votes: {{ballot.get('response_count')}}</p>

@@ -1,17 +1,14 @@
-BallotApp.controller('ballotViewController', function ($scope, ballot, $ionicNavBarDelegate, $stateParams, $state) {
+BallotApp.controller('ballotViewController', function ($scope, ballot, $ionicNavBarDelegate, $stateParams) {
     $scope.ballot = ballot;
+    $scope.owns = !!$stateParams.owns;
 
-    $scope.action_button = "Back";
-    $scope.action = function () {
+    $scope.back = function () {
         $ionicNavBarDelegate.back()
     };
+    $scope.afterDelete = function(promise){
+        promise.then(function(){
+            $scope.back()
+        })
+    }
 
-    if ($stateParams.action === "vote") {
-        $scope.action = function () {
-            $state.go('vote')
-        };
-        $scope.action_button = "Continue";
-    };
-
-    $scope.back = $ionicNavBarDelegate.back
 });

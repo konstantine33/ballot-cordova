@@ -65,7 +65,7 @@ var BallotApp = angular.module('starter', ['ionic', 'angularMoment'])
                 controller: "resultsController"
             })
             .state('ballot', {
-                url: "/ballot/:ballot_id?action",
+                url: "/ballot/:ballot_id?owns",
                 templateUrl: "app/ballot-view/ballot-view.html",
                 controller: "ballotViewController",
                 resolve: {

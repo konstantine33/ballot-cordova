@@ -1,18 +1,31 @@
 <ion-view title="">
-    <ion-content>
+    <ion-nav-buttons side="right">
+        <button class="button button-clear button-assertive"
+                ng-click="ballot.confirmDelete(afterDelete)" ng-show="owns && !ballot.get('closed')"> Delete
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="padding">
         <h2>Question:</h2>
+
         <p>{{ballot.get('question')}}</p>
 
         <div ng-show="ballot.get('end_time')">
             <h4>End Time</h4>
+
             <p>{{ballot.get('end_time')}}</p>
         </div>
 
         <p>YES: {{ballot.get('yes_count')}}</p>
+
         <p>NO: {{ballot.get('no_count')}}</p>
+
         <p>SKIP: {{ballot.get('skip_count')}}</p>
 
-        <button class="button button-positive" ng-click="action()">{{action_button}}</button>
+        <button class="button button-block button-positive" ng-click="back()">Back</button>
+        <div ng-show="owns && !ballot.get('closed')">
+            <button class="button button-block button-warning" ng-click="ballot.confirmClose()">Close Ballot</button>
+            <p class="text-muted">Tip: You cannot delete a ballot after it has closed.</p>
+        </div>
 
     </ion-content>
 </ion-view>
