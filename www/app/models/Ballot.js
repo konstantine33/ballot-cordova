@@ -1,4 +1,4 @@
-BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery) {
+BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPresenter) {
     function Ballot(data) {
         this.data = data || {};
         this.url = Ballot.url + "/" + this.data._id;
@@ -13,6 +13,7 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery) {
     };
 
     Ballot.prototype.close = function () {
+        this.data.closed = true;
         return $http.post(this.url, {closed: true}).then(function (response) {
             return response.data
         })
@@ -37,6 +38,8 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery) {
             return response.data
         })
     };
+
+    angular.extend(Ballot.prototype, BallotPresenter);
 
     /////////////////////////////////////
     //STATIC METHODS
