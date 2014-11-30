@@ -11,6 +11,8 @@ BallotApp.controller('voteController', function ($scope, Ballot, $window, $state
         $scope.ballot.respond(response)
             .then(function () {
                 $state.go('ballot', {ballot_id: $scope.ballot.getId(), action: "vote"})
+            }, function(e){
+                console.log(e)
             })
     };
 

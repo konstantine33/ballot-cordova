@@ -11,6 +11,13 @@
   height: 300px;
   overflow: hidden; }
 
+.content-center-parent {
+  display: table;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
 .content-center-child {
   display: table-cell;
   vertical-align: middle; }

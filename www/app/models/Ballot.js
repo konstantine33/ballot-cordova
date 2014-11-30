@@ -14,7 +14,8 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
 
     Ballot.prototype.close = function () {
         this.data.closed = true;
-        return $http.post(this.url, {closed: true}).then(function (response) {
+        this.data.closed_on = new Date();
+        return $http.post(this.url + "/close").then(function (response) {
             return response.data
         })
     };

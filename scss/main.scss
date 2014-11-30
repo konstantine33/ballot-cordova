@@ -19,6 +19,10 @@
   @include content-center-parent(100%, 300px)
 }
 
+.content-center-parent {
+  @include content-center-parent()
+}
+
 .content-center-child {
   display: table-cell;
   vertical-align: middle;

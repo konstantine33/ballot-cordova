@@ -29,6 +29,18 @@ BallotApp.factory('BallotPresenter', function($ionicActionSheet){
                     return true;
                 }
             })
+        },
+        noPercent: function(){
+            if(!this.get('response_count')){
+                return 0;
+            }
+            return this.get('no_count') / this.get('response_count') * 100
+        },
+        yesPercent: function(){
+            if(!this.get('response_count')){
+                return 0;
+            }
+            return this.get('yes_count') / this.get('response_count') * 100
         }
     }
 });
