@@ -4,7 +4,8 @@
             <a class="item item-button-right" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId(), owns: true})">
                 <button class="button button-assertive button-clear" ng-show="!ballot.get('closed')" ng-click="confirmClose($event, ballot)">Close</button>
                 {{ballot.get('question')}}
-                <p class="text-muted">Votes: {{ballot.get('response_count')}}</p>
+                <p class="text-small text-muted" ng-if="ballot.get('closed')">Closed <span am-time-ago="ballot.get('closed_on')"></span></p>
+                <p class="text-small text-muted" ng-if="!ballot.get('closed')">Created <span am-time-ago="ballot.get('created_at')"></span></p>
             </a>
         </ul>
     </ion-content>

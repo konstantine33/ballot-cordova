@@ -4,6 +4,9 @@
 .text-center {
   text-align: center; }
 
+.text-small {
+  font-size: 0.9em; }
+
 .card-content-center-parent {
   display: table;
   text-align: center;
