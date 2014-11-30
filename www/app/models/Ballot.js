@@ -40,6 +40,12 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
         })
     };
 
+    Ballot.prototype.refresh = function(){
+        return $http.get(this.url).then(function(response){
+            return new Ballot(response.data)
+        })
+    };
+
     angular.extend(Ballot.prototype, BallotPresenter);
 
     /////////////////////////////////////
