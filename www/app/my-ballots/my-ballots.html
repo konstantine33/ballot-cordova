@@ -8,13 +8,14 @@
                 </div>
             </div>
         </div>
-        <ul class="list">
+        <ion-list>
             <a class="item item-button-right" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId(), owns: true})">
                 <button class="button button-assertive button-clear" ng-show="!ballot.get('closed')" ng-click="confirmClose($event, ballot)">Close</button>
                 {{ballot.get('question')}}
                 <p class="text-small text-muted" ng-if="ballot.get('closed')">Closed <span am-time-ago="ballot.get('closed_on')"></span></p>
                 <p class="text-small text-muted" ng-if="!ballot.get('closed')">Created <span am-time-ago="ballot.get('created_at')"></span></p>
             </a>
-        </ul>
+            <ion-infinite-scroll on-infinite="getMore()" distance="10%" ng-if="hasMore"></ion-infinite-scroll>
+        </ion-list>
     </ion-content>
 </ion-view>

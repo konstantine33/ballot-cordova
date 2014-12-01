@@ -46,11 +46,10 @@ BallotApp.factory('APIQuery', function ($q, $http) {
         var deferred = $q.defer();
         var self = this;
         var param_obj = this.buildParams(count);
-
         $http({
             method: "GET",
             url: self.url,
-            params: {q: JSON.stringify(param_obj),'cb': new Date().getTime()}
+            params: param_obj
         }).success(function (data) {
             var model_list = [];
 
