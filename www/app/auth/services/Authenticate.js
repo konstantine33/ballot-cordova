@@ -2,9 +2,8 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, BallotError, SER
     function authenticate() {
         var deferred = $q.defer();
 
-        //REMOVE BELOW
-        var authenticator = "test1234567890";
-        //var authenticator;
+        //var authenticator = "test1234567890";
+        var authenticator;
 
         //Android only
         if ($window.device && $window.device.uuid) {

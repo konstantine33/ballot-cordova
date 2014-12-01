@@ -1,9 +1,11 @@
-BallotApp.controller('authController', function ($state, Authenticate, $ionicLoading, $timeout) {
+BallotApp.controller('authController', function ($state, Authenticate, $ionicLoading, $ionicPlatform) {
     $ionicLoading.show();
 
-    Authenticate()
-        .then(function () {
-            $ionicLoading.hide();
-            $state.go('vote');
-        })
+    $ionicPlatform.ready(function(){
+        Authenticate()
+            .then(function () {
+                $ionicLoading.hide();
+                $state.go('vote');
+            })
+    })
 });
