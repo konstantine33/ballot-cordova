@@ -1,40 +1,5 @@
 <ion-view title="Vote">
     <ion-content>
-        <div ng-show="loaded">
-            <div ng-show="ballot">
-                <ul id="ballot">
-                    <li class="list card">
-                        <div class="item item-body">
-                            <div class="card-content-center-parent">
-                                <div class="content-center-child">
-                                    <h2 style="font-size: 18px">{{ballot.get('question')}}</h2>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item tabs tabs-secondary">
-                            <button class="tab-item button-assertive button button-clear icon ion-ios7-arrow-back icon-left"
-                                    ng-click="respond(responseType.NO)">
-                                No
-                            </button>
-                            <button class="tab-item button-balanced button button-clear icon ion-ios7-arrow-forward icon-right"
-                                    ng-click="respond(responseType.YES)">
-                                Yes
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-
-            <div class="padding" ng-show="!ballot">
-                <div class="card-content-center-parent">
-                    <div class="content-center-child">
-                        <h3 class="text-muted">There are currently no ballots for you to vote on.</h3>
-                    </div>
-                </div>
-                <button class="button button-positive button-block" ui-sref="create_ballot">Ask a Question</button>
-            </div>
-        </div>
+        <voting-cards new-ballots-event="newBallotsEvent"></voting-cards>
     </ion-content>
 </ion-view>
