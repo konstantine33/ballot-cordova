@@ -31,8 +31,29 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
     };
 
     Ballot.prototype.respond = function (value) {
+        var self = this;
         if (this.get('closed')) {
             return $q.reject('You cannot respond to a closed ballot.')
+        }
+
+        //Cache in response value
+        switch(value){
+            case Ballot.responseType.YES:
+                this.data.response_count ++;
+                this.data.yes_count ++;
+                break;
+            case Ballot.responseType.NO:
+                this.data.response_count ++;
+                this.data.no_count ++;
+                break;
+            case Ballot.responseType.SKIP:
+                this.data.skip_count ++;
+                break;
+            case Ballot.responseType.FLAG:
+                this.data.flag_count ++;
+                break;
+            default:
+                return $q.reject('Invalid response type')
         }
 
         return $http.post(this.url + "/respond", {response: value}).then(function (response) {
@@ -41,8 +62,9 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
     };
 
     Ballot.prototype.refresh = function(){
+        var self = this;
         return $http.get(this.url).then(function(response){
-            return new Ballot(response.data)
+            self.data = response.data;
         })
     };
 

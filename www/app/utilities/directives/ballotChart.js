@@ -27,14 +27,17 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval) {
     return {
         restrict: "AE",
         scope: {
-            ballot: "="
+            ballot: "=",
+            height: "@"
         },
         link: function (scope, elem, attrs) {
             var id = "ballotChart" + incrementer;
             incrementer++;
 
+            var height = scope.height || 400;
+
             //Adds the required elements
-            var chart_elem = '<div style="height: 400px" ng-show="ballot.get(\'response_count\')" id="' + id + '"></div>';
+            var chart_elem = '<div style="height:' + height + 'px" ng-show="ballot.get(\'response_count\')" id="' + id + '"></div>';
             var no_responses = '<div class="card-content-center-parent" ng-hide="ballot.get(\'response_count\')"><div class="content-center-child"><h3 class="text-muted">There are no responses to this ballot.</h3></div></div>'
             elem.append($compile(no_responses)(scope));
             elem.append($compile(chart_elem)(scope));
@@ -47,8 +50,7 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval) {
             if(!scope.ballot.get('closed')){
                 var updateChart = function () {
                     scope.ballot.refresh()
-                        .then(function (new_ballot) {
-                            scope.ballot = new_ballot;
+                        .then(function () {
                             dps.updateData(scope.ballot);
 
                             //Only render if the chart has been created - ie after there are responses

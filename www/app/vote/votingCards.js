@@ -1,5 +1,6 @@
 BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCache, Ballot, $window) {
-    var card_template = "<li voting-card ballot='ballot'></li>";
+    var voting_card_template = "<li voting-card></li>";
+    var results_card_template = "<li results-card></li>";
 
 
     return {
@@ -24,11 +25,11 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                 }
             });
             stack.on('throwoutleft', function (e) {
-                scope.current_card.respond(scope.responseType.NO);
+                scope.current_card.action(scope.responseType.NO);
             });
 
             stack.on('throwoutright', function (e) {
-                scope.current_card.respond(scope.responseType.YES);
+                scope.current_card.action(scope.responseType.YES);
             });
 
             //Receives new data
@@ -42,7 +43,7 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                 //Runs only first time
                 if (!scope.loaded) {
                     scope.loaded = true;
-                    setNewCard()
+                    setNewVotingCard()
                 }
             });
 
@@ -52,15 +53,18 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
 
             //////////////// Voting Card Behavior
 
-            function VotingCard(ballot, stack, scope) {
+            function VotingCard(ballot, card_template, stack, scope, actionFnc) {
                 var self = this;
                 this.ballot = ballot;
                 this.scope = scope;
+                this.action = function () {
+                    actionFnc.apply(self, arguments)
+                };
 
                 var newScope = scope.$new();
                 newScope.ballot = ballot;
-                newScope.respond = function (response) {
-                    self.respond(response);
+                newScope.action = function (response) {
+                    self.action(response);
                 };
 
                 this.elem = $compile(card_template)(newScope);
@@ -74,28 +78,39 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                 this.card.destroy();
                 this.elem.remove();
             };
-            VotingCard.prototype.respond = function (response) {
-                console.log('responded to ' + this.ballot.get('question') + ' with ' + response);
-                setNewCard();
-            };
 
-            function setNewCard() {
+            function setNewVotingCard() {
                 if (scope.current_card) {
                     scope.current_card.destroy();
                     scope.current_card = null;
                 }
 
+                var actionFnc = function (response) {
+                    this.ballot.respond(response);
+                    setNewResultsCard();
+                };
+
                 if (scope.ballots.length) {
-                    scope.current_card = new VotingCard(scope.ballots.shift(), stack, scope);
+                    scope.current_card = new VotingCard(scope.ballots.shift(), voting_card_template, stack, scope, actionFnc);
                     scope.current_card.attach(list_parent);
                 }
-                scope.$apply();
+
+                //Speeds up the digest cycle.
+                if(!scope.$$phase && !scope.$root.$$phase){
+                    scope.$apply();
+                }
+
             }
 
+            function setNewResultsCard() {
+                var actionFnc = function () {
+                    setNewVotingCard();
+                };
 
-
-
-
+                scope.current_card.destroy();
+                scope.current_card = new VotingCard(scope.current_card.ballot, results_card_template, stack, scope, actionFnc);
+                scope.current_card.attach(list_parent);
+            }
         }
     }
 });
@@ -103,6 +118,15 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
 BallotApp.directive('votingCard', function () {
     return {
         templateUrl: 'app/vote/voteCard.html',
+        link: function (scope, elem, attr) {
+
+        }
+    }
+});
+
+BallotApp.directive('resultsCard', function () {
+    return {
+        templateUrl: 'app/vote/resultsCard.html',
         link: function (scope, elem, attr) {
 
         }
