@@ -1,6 +1,7 @@
 BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCache, Ballot, $window) {
     var card_template = "<li voting-card ballot='ballot'></li>";
 
+
     return {
         scope: {
             newBallotsEvent: "=" //string indicating what the new ballot event is named
@@ -14,7 +15,6 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
             scope.current_card = null;
             scope.responseType = Ballot.responseType;
             var list_parent = elem.find('ul');
-
             var stack = $window.gajus.Swing.Stack({
                 isThrowOut: function (offset, element, confidence) {
                     return confidence > 0.45
@@ -31,44 +31,6 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                 scope.current_card.respond(scope.responseType.YES);
             });
 
-            var newCard = function(){
-                if(scope.current_card){
-                    scope.current_card.destroy();
-                    scope.current_card = null;
-                }
-
-                if(scope.ballots.length){
-                    scope.current_card = new VotingCard(scope.ballots.shift());
-                    scope.current_card.attach(list_parent);
-                }
-            };
-
-            function VotingCard (ballot){
-                this.ballot = ballot;
-                var newScope = scope.$new();
-                newScope.ballot = ballot;
-                newScope.respond = function(response){
-                    console.log('responded to ' + ballot.get('question') + ' with ' + response);
-                    newCard()
-                    scope.$apply()
-                };
-
-                this.respond = newScope.respond;
-
-                this.elem = $compile(card_template)(newScope);
-                this.card = stack.createCard(this.elem[0]);
-            }
-            VotingCard.prototype.attach = function(parent){
-                parent.append(this.elem)
-            };
-            VotingCard.prototype.destroy = function(){
-                this.card.destroy();
-                this.elem.remove();
-            };
-
-
-
-
             //Receives new data
             var off = $rootScope.$on(scope.newBallotsEvent, function (event, args) {
                 args.ballots.forEach(function (b) {
@@ -80,13 +42,58 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                 //Runs only first time
                 if (!scope.loaded) {
                     scope.loaded = true;
-                    newCard()
+                    setNewCard()
                 }
             });
 
             scope.$on('$destroy', function () {
                 off();
             });
+
+            //////////////// Voting Card Behavior
+
+            function VotingCard(ballot, stack, scope) {
+                var self = this;
+                this.ballot = ballot;
+                this.scope = scope;
+
+                var newScope = scope.$new();
+                newScope.ballot = ballot;
+                newScope.respond = function (response) {
+                    self.respond(response);
+                };
+
+                this.elem = $compile(card_template)(newScope);
+                this.card = stack.createCard(this.elem[0]);
+            }
+
+            VotingCard.prototype.attach = function (parent) {
+                parent.append(this.elem)
+            };
+            VotingCard.prototype.destroy = function () {
+                this.card.destroy();
+                this.elem.remove();
+            };
+            VotingCard.prototype.respond = function (response) {
+                console.log('responded to ' + this.ballot.get('question') + ' with ' + response);
+                setNewCard();
+            };
+
+            function setNewCard() {
+                if (scope.current_card) {
+                    scope.current_card.destroy();
+                    scope.current_card = null;
+                }
+
+                if (scope.ballots.length) {
+                    scope.current_card = new VotingCard(scope.ballots.shift(), stack, scope);
+                    scope.current_card.attach(list_parent);
+                }
+                scope.$apply();
+            }
+
+
+
 
 
         }
