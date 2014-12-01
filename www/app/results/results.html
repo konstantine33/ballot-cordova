@@ -1,5 +1,13 @@
 <ion-view title="Ballot Results">
     <ion-content>
+        <div ng-hide="ballots.length || !loaded" class="padding">
+            <div class="card-full-content-center-parent">
+                <div class="content-center-child">
+                    <h3 class="text-muted">You haven't voted on any ballots yet.</h3>
+                    <button class="button button-positive button-block" ui-sref="vote" style="margin-top: 50px">Vote on a Ballot</button>
+                </div>
+            </div>
+        </div>
         <ul class="list">
             <a class="item" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId(), owns: false})">
                 {{ballot.get('question')}}
