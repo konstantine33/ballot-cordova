@@ -39,7 +39,6 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, BallotError, SER
 
                 keychain.getForKey(function (value) {
                     if (value) {
-                        console.log('got value ' + value)
                         authenticator = value;
                         return deferred.resolve();
                     } else {
@@ -47,7 +46,6 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, BallotError, SER
                     }
 
                 }, function () {
-                    console.log('did not get value')
                     setValue()
                 }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME)
 
