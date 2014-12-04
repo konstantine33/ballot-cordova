@@ -5,7 +5,8 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
 
     return {
         scope: {
-            newBallotsEvent: "=" //string indicating what the new ballot event is named
+            newBallotsEvent: "=", //string indicating what the new ballot event is named
+            getBallotsEvent: "="
         },
         templateUrl: 'app/vote/cardStack.html',
         replace: true,
@@ -93,6 +94,11 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                 if (scope.ballots.length) {
                     scope.current_card = new VotingCard(scope.ballots.shift(), voting_card_template, stack, scope, actionFnc);
                     scope.current_card.attach(list_parent);
+                }
+
+                //load more ballots if there are less than 2 ballots in the cache
+                if(scope.ballots.length < 2){
+                    $rootScope.$emit(scope.getBallotsEvent)
                 }
 
                 //Speeds up the digest cycle.
