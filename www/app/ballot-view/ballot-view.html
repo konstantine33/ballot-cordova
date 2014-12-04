@@ -5,16 +5,17 @@
         </button>
     </ion-nav-buttons>
     <ion-content class="padding">
-        <div class="text-center">
-            <h2>{{ballot.get('question')}}</h2>
+        <div class="text-center padding-top">
+            <h3>{{ballot.get('question')}}</h3>
             <p class="text-muted">
-                {{ballot.get('created_at') | amDateFormat:'l'}} -
+                ( {{ballot.get('created_at') | amDateFormat:'l'}} -
                 <span ng-if="ballot.get('closed')">{{ballot.get('closed_on') | amDateFormat: "l"}}</span>
                 <span ng-if="!ballot.get('closed')">ongoing</span>
+                )
             </p>
 
         </div>
-        <ballot-chart ballot="ballot"></ballot-chart>
+        <ballot-chart ballot="ballot" height="300"></ballot-chart>
 
         <button class="button button-block button-positive" ng-click="back()">Back</button>
         <div ng-show="owns && !ballot.get('closed')">

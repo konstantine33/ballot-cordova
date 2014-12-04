@@ -47,14 +47,14 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval) {
             dps.updateData(scope.ballot);
 
             //If the ballot is not closed, then we initialize a refresher to pull semi real time data
-            if(!scope.ballot.get('closed')){
+            if (!scope.ballot.get('closed')) {
                 var updateChart = function () {
                     scope.ballot.refresh()
                         .then(function () {
                             dps.updateData(scope.ballot);
 
                             //Only render if the chart has been created - ie after there are responses
-                            if(chart){
+                            if (chart) {
                                 chart.render();
                             }
                         })
@@ -62,7 +62,7 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval) {
 
                 var canceller = $interval(updateChart, 3000);
 
-                scope.$on('$destroy', function(){
+                scope.$on('$destroy', function () {
                     $interval.cancel(canceller);
                 })
             }
@@ -77,15 +77,17 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval) {
                             interactivityEnabled: false,
                             axisY: {
                                 minimum: 0,
-                                maximum: 110,
-                                interval: 20,
+                                interval: 10,
                                 gridThickness: 0,
                                 tickThickness: 0,
                                 lineThickness: 0,
                                 labelFontColor: "transparent"
 
                             },
-
+                            axisX: {
+                              tickThickness: 0,
+                                labelFontSize: 18
+                            },
                             data: [
                                 {
                                     type: "column",
