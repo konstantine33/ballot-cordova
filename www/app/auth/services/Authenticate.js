@@ -59,14 +59,12 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, BallotError, SER
 
         return deferred.promise.then(function(){
             return $http.post(SERVER_URL + '/auth', {authenticator: authenticator})
-                .success(function (data) {
-                    BallotToken.store(data.token);
-                    deferred.resolve()
-                })
-                .error(function (error) {
+                .then(function(response){
+                    BallotToken.store(response.data.token);
+                }, function(e){
                     BallotToken.del();
-                    BallotError(error, {deferred: deferred});
-                });
+                    return $q.reject(e);
+                })
         }, function(e){
             BallotError(e);
         });
