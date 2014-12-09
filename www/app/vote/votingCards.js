@@ -90,8 +90,10 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                 }
 
                 var actionFnc = function (response) {
-                    this.ballot.respond(response);
-                    VotingManager.removePending(this.ballot.getId());
+                    var self = this;
+                    this.ballot.respond(response).finally(function(){
+                        VotingManager.removePending(self.ballot.getId());
+                    });
                     setNewResultsCard();
                 };
 

@@ -37,20 +37,20 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
         }
 
         //Cache in response value
-        switch(value){
+        switch (value) {
             case Ballot.responseType.YES:
-                this.data.response_count ++;
-                this.data.yes_count ++;
+                this.data.response_count++;
+                this.data.yes_count++;
                 break;
             case Ballot.responseType.NO:
-                this.data.response_count ++;
-                this.data.no_count ++;
+                this.data.response_count++;
+                this.data.no_count++;
                 break;
             case Ballot.responseType.SKIP:
-                this.data.skip_count ++;
+                this.data.skip_count++;
                 break;
             case Ballot.responseType.FLAG:
-                this.data.flag_count ++;
+                this.data.flag_count++;
                 break;
             default:
                 return $q.reject('Invalid response type')
@@ -63,9 +63,9 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
         })
     };
 
-    Ballot.prototype.refresh = function(){
+    Ballot.prototype.refresh = function () {
         var self = this;
-        return $http.get(this.url).then(function(response){
+        return $http.get(this.url).then(function (response) {
             self.data = response.data;
         })
     };
@@ -99,9 +99,14 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
     };
 
     Ballot.recommend = function (count) {
-        return $http.get(Ballot.url + "/rec", {params: {limit: count, exclude: JSON.stringify(VotingManager.getPending())}})
+        return $http.get(Ballot.url + "/rec", {
+            params: {
+                limit: count,
+                exclude: JSON.stringify(VotingManager.getPending())
+            }
+        })
             .then(function (response) {
-                return response.data.map(function(ballot){
+                return response.data.map(function (ballot) {
                     return new Ballot(ballot);
                 });
             })
