@@ -57,7 +57,6 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
         }
 
         var promise = $http.post(this.url + "/respond", {response: value});
-        VotingManager.wrapPromise(promise, self.getId());
 
         return promise.then(function (response) {
             return response.data
@@ -100,7 +99,7 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
     };
 
     Ballot.recommend = function (count) {
-        return $http.get(Ballot.url + "/rec", {limit: count, exclude: VotingManager.getPending()})
+        return $http.get(Ballot.url + "/rec", {params: {limit: count, exclude: JSON.stringify(VotingManager.getPending())}})
             .then(function (response) {
                 return response.data.map(function(ballot){
                     return new Ballot(ballot);

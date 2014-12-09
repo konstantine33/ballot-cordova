@@ -1,4 +1,4 @@
-BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCache, Ballot, $window) {
+BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCache, Ballot, $window, VotingManager) {
     var voting_card_template = "<li voting-card></li>";
     var results_card_template = "<li results-card></li>";
 
@@ -38,6 +38,7 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                 args.ballots.forEach(function (b) {
                     if (b) {
                         scope.ballots.push(b);
+                        VotingManager.setPending(b.getId())
                     }
                 });
 
@@ -49,15 +50,15 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
             });
 
             scope.$on('$destroy', function () {
+                VotingManager.removeAllPending()
                 off();
             });
 
             //////////////// Voting Card Behavior
 
-            function VotingCard(ballot, card_template, stack, scope, actionFnc) {
+            function VotingCard(ballot, card_template, stack, actionFnc) {
                 var self = this;
                 this.ballot = ballot;
-                this.scope = scope;
                 this.action = function () {
                     actionFnc.apply(self, arguments)
                 };
@@ -68,6 +69,7 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                     self.action(response);
                 };
 
+                this.scope = newScope;
                 this.elem = $compile(card_template)(newScope);
                 this.card = stack.createCard(this.elem[0]);
             }
@@ -78,6 +80,7 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
             VotingCard.prototype.destroy = function () {
                 this.card.destroy();
                 this.elem.remove();
+                this.scope.$destroy(); // For some reason elem.remove() is not destroying the scope.. So we will destroy it manually otherwise there'll be a memory leak
             };
 
             function setNewVotingCard() {
@@ -88,11 +91,12 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
 
                 var actionFnc = function (response) {
                     this.ballot.respond(response);
+                    VotingManager.removePending(this.ballot.getId());
                     setNewResultsCard();
                 };
 
                 if (scope.ballots.length) {
-                    scope.current_card = new VotingCard(scope.ballots.shift(), voting_card_template, stack, scope, actionFnc);
+                    scope.current_card = new VotingCard(scope.ballots.shift(), voting_card_template, stack, actionFnc);
                     scope.current_card.attach(list_parent);
                 }
 
@@ -114,7 +118,7 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                 };
 
                 scope.current_card.destroy();
-                scope.current_card = new VotingCard(scope.current_card.ballot, results_card_template, stack, scope, actionFnc);
+                scope.current_card = new VotingCard(scope.current_card.ballot, results_card_template, stack, actionFnc);
                 scope.current_card.attach(list_parent);
             }
         }

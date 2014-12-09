@@ -1,4 +1,4 @@
-BallotApp.factory('Authenticate', function ($q, $http, $window, BallotError, SERVER_URL, BallotToken) {
+BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, BallotToken) {
     var BALLOT_KEYCHAIN = "ballot_account_id";
     var BALLOT_SERVICE_NAME = "com.getballot";
 

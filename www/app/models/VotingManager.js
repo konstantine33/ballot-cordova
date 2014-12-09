@@ -16,16 +16,8 @@ BallotApp.factory('VotingManager', function($q){
         return Object.keys(self.pending);
     };
 
-    VotingManager.prototype.wrapPromise = function(promise, ballot_id){
-        var self = this;
-        this.setPending(ballot_id);
-        return promise.then(function(data){
-            self.removePending(ballot_id);
-            return data;
-        }, function(error){
-            self.removePending(ballot_id);
-            return $q.reject(error)
-        })
+    VotingManager.prototype.removeAllPending = function(){
+        this.pending = {};
     };
 
     var manager = new VotingManager();

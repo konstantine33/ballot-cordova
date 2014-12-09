@@ -3,7 +3,7 @@ BallotApp.controller('voteController', function ($scope, Ballot, $rootScope) {
     $scope.getBallotsEvent = "GetBallotsEvent";
 
     function getBallots() {
-        Ballot.recommend(5)
+        Ballot.recommend(20)
             .then(function (ballots) {
                 $scope.loaded = true;
                 $rootScope.$emit($scope.newBallotsEvent, {ballots: ballots});
