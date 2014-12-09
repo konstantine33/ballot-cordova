@@ -63,8 +63,6 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, BallotError, SER
                     BallotToken.del();
                     return $q.reject(e);
                 })
-        }, function(e){
-            BallotError(e);
         });
 
     }

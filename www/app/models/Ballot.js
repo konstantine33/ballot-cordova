@@ -1,4 +1,4 @@
-BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPresenter) {
+BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPresenter, VotingManager) {
     function Ballot(data) {
         this.data = data || {};
         this.url = Ballot.url + "/" + this.data._id;
@@ -56,7 +56,10 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
                 return $q.reject('Invalid response type')
         }
 
-        return $http.post(this.url + "/respond", {response: value}).then(function (response) {
+        var promise = $http.post(this.url + "/respond", {response: value});
+        VotingManager.wrapPromise(promise, self.getId());
+
+        return promise.then(function (response) {
             return response.data
         })
     };
@@ -97,7 +100,7 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
     };
 
     Ballot.recommend = function (count) {
-        return $http.get(Ballot.url + "/rec", {limit: count})
+        return $http.get(Ballot.url + "/rec", {limit: count, exclude: VotingManager.getPending()})
             .then(function (response) {
                 return response.data.map(function(ballot){
                     return new Ballot(ballot);

@@ -57,8 +57,6 @@ BallotApp.controller('createBallotController', function ($scope, Ballot, $window
         BusyManager.manageRequest(promise, $scope.busy_id);
         promise.then(function (b) {
             $state.go('my_ballots')
-        }, function (e) {
-            BallotError(e)
         })
     }
 });

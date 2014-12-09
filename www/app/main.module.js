@@ -1,8 +1,10 @@
 var BallotApp = angular.module('starter', ['ionic', 'angularMoment', 'LWBusy'])
+
+
 .constant('SERVER_URL', 'http://ballot-server.herokuapp.com')
     //.constant('SERVER_URL', 'http://localhost:3000')
     .constant('$ionicLoadingConfig', {template: '<i class="icon ion-loading-c"></i> Loading...'})
-    .config(function ($httpProvider) {
+    .config(function ($httpProvider, $provide) {
         $httpProvider.interceptors.push(function ($q, $window, BallotToken) {
             return {
                 request: function (config) {
@@ -17,6 +19,16 @@ var BallotApp = angular.module('starter', ['ionic', 'angularMoment', 'LWBusy'])
                 },
                 response: function (response) {
                     return response || $q.when(response);
+                },
+                responseError: function(error){
+                    console.log(error);
+                    var message = "An error has occurred. Please exit and restart Ballot.";
+                    if(error.status === 0){
+                        message = "Internet connection was lost. Please connect to the internet then restart Ballot."
+                    }
+                    alert(message);
+
+                    return $q.reject(error)
                 }
             };
         });
