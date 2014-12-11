@@ -12,7 +12,7 @@
         </div>
 
         <ion-list>
-            <a class="item" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId(), owns: false})">
+            <a class="item" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId()})">
                 {{ballot.get('question')}}
                 <p class="text-muted">Votes: {{ballot.get('response_count')}}</p>
             </a>

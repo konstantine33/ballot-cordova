@@ -1,13 +1,15 @@
-BallotApp.directive('ballotChart', function ($window, $compile, $interval) {
+BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballot) {
     var incrementer = 0;
+    var RESPONSE = {
+        LEFT: Ballot.responseType.LEFT_RESPONSE,
+        RIGHT: Ballot.responseType.RIGHT_RESPONSE
+    };
 
     //Handles updating and keep track of data points for the chart object.
     function ChartDataPoints() {
         this.data = [{
-            label: "No",
             color: "#ef473a"
         }, {
-            label: "Yes",
             color: "#33cd5f"
         }]
     }
@@ -17,11 +19,13 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval) {
             return percent + "%  (" + count + ")";
         };
 
-        this.data[0].y = ballot.noPercent();
-        this.data[0].indexLabel = indexFormatter(ballot.noPercent(true), ballot.get('no_count'));
+        this.data[0].y = ballot.getAnswerPercent(RESPONSE.LEFT);
+        this.data[0].indexLabel = indexFormatter(ballot.getAnswerPercent(RESPONSE.LEFT, true), ballot.getAnswerCount(RESPONSE.LEFT));
+        this.data[0].label = ballot.getAnswerTitle(RESPONSE.LEFT);
 
-        this.data[1].y = ballot.yesPercent();
-        this.data[1].indexLabel = indexFormatter(ballot.yesPercent(true), ballot.get('yes_count'));
+        this.data[1].y = ballot.getAnswerPercent(RESPONSE.RIGHT);
+        this.data[1].indexLabel = indexFormatter(ballot.getAnswerPercent(RESPONSE.RIGHT, true), ballot.getAnswerCount(RESPONSE.RIGHT));
+        this.data[1].label = ballot.getAnswerTitle(RESPONSE.RIGHT);
     };
 
     return {
@@ -46,26 +50,25 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval) {
             var dps = new ChartDataPoints();
             dps.updateData(scope.ballot);
 
-            //If the ballot is not closed, then we initialize a refresher to pull semi real time data
-            if (!scope.ballot.get('closed')) {
-                var updateChart = function () {
-                    scope.ballot.refresh()
-                        .then(function () {
-                            dps.updateData(scope.ballot);
 
-                            //Only render if the chart has been created - ie after there are responses
-                            if (chart) {
-                                chart.render();
-                            }
-                        })
-                };
+            var updateChart = function () {
+                scope.ballot.refresh()
+                    .then(function () {
+                        dps.updateData(scope.ballot);
 
-                var canceller = $interval(updateChart, 3000);
+                        //Only render if the chart has been created - ie after there are responses
+                        if (chart) {
+                            chart.render();
+                        }
+                    })
+            };
 
-                scope.$on('$destroy', function () {
-                    $interval.cancel(canceller);
-                })
-            }
+            var canceller = $interval(updateChart, 3000);
+
+            scope.$on('$destroy', function () {
+                $interval.cancel(canceller);
+            });
+
 
             //If there are no responses, don't bother generating the chart
             var off = scope.$watch('ballot.data.response_count', function (newVal) {
@@ -85,7 +88,7 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval) {
 
                             },
                             axisX: {
-                              tickThickness: 0,
+                                tickThickness: 0,
                                 labelFontSize: 18
                             },
                             data: [

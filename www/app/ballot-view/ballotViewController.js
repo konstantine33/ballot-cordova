@@ -1,7 +1,5 @@
-BallotApp.controller('ballotViewController', function ($scope, ballot, $ionicNavBarDelegate, $stateParams) {
+BallotApp.controller('ballotViewController', function ($scope, ballot, $ionicNavBarDelegate) {
     $scope.ballot = ballot;
-    $scope.owns = $stateParams.owns === "true" || $stateParams.owns === true;
-
     $scope.back = function () {
         $ionicNavBarDelegate.back()
     };

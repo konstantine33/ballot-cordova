@@ -1,32 +1,24 @@
 <ion-view title="Ask a Question">
-    <ion-content class="padding">
+    <ion-content>
         <div class="bar bar-header bar-assertive item" ng-show="form_data.error">
             <h2 class="title">{{form_data.error}}</h2>
         </div>
-        <div class="item item-divider">
-            Question
-        </div>
-        <label class="item item-input">
-            <textarea b-maxlength="maxQuestionLength" ng-model="form_data.question"
-                      placeholder='Enter Your Question - Make sure to phrase it as a "Yes/No" question.'></textarea>
-        </label>
-
-        <p class="text-right text-muted">{{maxQuestionLength - form_data.question.length}}</p>
 
         <div class="list">
-            <div class="item item-divider">
-                Close Poll After
-            </div>
-            <label class="item item-radio" ng-repeat="opt in close_options">
-                <input type="radio" name="group" ng-value="opt.value" ng-model="form_data.close_opt">
-
-                <div class="item-content">
-                    {{opt.title}}
-                </div>
-                <i class="radio-icon ion-checkmark"></i>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label text-muted">Question <small>({{maxQuestionLength - form_data.question.length}})</small></span>
+                <textarea b-maxlength="maxQuestionLength" ng-model="form_data.question" rows="5"></textarea>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label text-muted">Left Answer Option <small>({{maxAnswerLength - form_data.left_answer.length}})</small></span>
+                <input type="text" ng-model="form_data.left_answer" b-maxlength="maxAnswerLength">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label text-muted">Right Answer Option <small>({{maxAnswerLength - form_data.right_answer.length}})</small></span>
+                <input type="text" ng-model="form_data.right_answer" b-maxlength="maxAnswerLength">
             </label>
         </div>
 
-        <button class="button button-block button-positive" ng-click="done()" busy-button="Saving..." busy-id="busy_id">Create Ballot</button>
+        <button class="button button-full button-positive" ng-click="done()" busy-button="Saving..." busy-id="busy_id">Create Ballot</button>
     </ion-content>
 </ion-view>

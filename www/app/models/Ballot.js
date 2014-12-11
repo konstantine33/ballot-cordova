@@ -12,13 +12,13 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
         return this.data._id
     };
 
-    Ballot.prototype.close = function () {
-        this.data.closed = true;
-        this.data.closed_on = new Date();
-        return $http.post(this.url + "/close").then(function (response) {
-            return response.data
-        })
-    };
+    //Ballot.prototype.close = function () {
+    //    this.data.closed = true;
+    //    this.data.closed_on = new Date();
+    //    return $http.post(this.url + "/close").then(function (response) {
+    //        return response.data
+    //    })
+    //};
 
     Ballot.prototype.destroy = function () {
         if (this.get('closed')) {
@@ -30,22 +30,20 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
 
     };
 
-    Ballot.prototype.respond = function (value) {
-        var self = this;
-        if (this.get('closed')) {
-            return $q.reject('You cannot respond to a closed ballot.')
+    Ballot.prototype.cacheVote = function(value){
+        var answer = this.get('answers')[value];
+        if(!answer){
+            throw Error('Answer value doesn\'t exist')
         }
 
+        answer.votes ++;
+        this.data.response_count ++;
+    };
+
+    Ballot.prototype.respond = function (value) {
+        var self = this;
         //Cache in response value
         switch (value) {
-            case Ballot.responseType.YES:
-                this.data.response_count++;
-                this.data.yes_count++;
-                break;
-            case Ballot.responseType.NO:
-                this.data.response_count++;
-                this.data.no_count++;
-                break;
             case Ballot.responseType.SKIP:
                 this.data.skip_count++;
                 break;
@@ -53,7 +51,11 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
                 this.data.flag_count++;
                 break;
             default:
-                return $q.reject('Invalid response type')
+                try {
+                    self.cacheVote(value);
+                }catch(e){
+                    return $q.reject('Invalid response type')
+                }
         }
 
         var promise = $http.post(this.url + "/respond", {response: value});
@@ -112,14 +114,16 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
             })
     };
 
-    Ballot.create = function (data) {
-        data = data || {};
-        var ballot_data = {};
-        if (!data.question) {
+    Ballot.create = function (question, left_answer, right_answer) {
+        if (!question) {
             return $q.reject('Must include question')
         }
-        ballot_data.question = data.question;
-        ballot_data.end_time = data.end_time;
+
+        var ballot_data = {};
+        ballot_data.question = question;
+        ballot_data.left_answer = left_answer;
+        ballot_data.right_answer = right_answer;
+
 
         return $http.post(Ballot.url, ballot_data).then(function (response) {
                 if (response.data) {
@@ -130,10 +134,15 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
     };
 
     Ballot.responseType = {
-        YES: "YES",
-        NO: "NO",
+        LEFT_RESPONSE: 0,
+        RIGHT_RESPONSE: 1,
         SKIP: "SKIP",
         FLAG: "FLAG"
+    };
+
+    Ballot.defaultAnswers = {
+        LEFT_RESPONSE: "No",
+        RIGHT_RESPONSE: "Yes"
     };
 
     return Ballot

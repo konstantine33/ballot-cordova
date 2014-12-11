@@ -26,11 +26,11 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                 }
             });
             stack.on('throwoutleft', function (e) {
-                scope.current_card.action(scope.responseType.NO);
+                scope.current_card.action(scope.responseType.LEFT_RESPONSE);
             });
 
             stack.on('throwoutright', function (e) {
-                scope.current_card.action(scope.responseType.YES);
+                scope.current_card.action(scope.responseType.RIGHT_RESPONSE);
             });
 
             //Receives new data
@@ -50,7 +50,7 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
             });
 
             scope.$on('$destroy', function () {
-                VotingManager.removeAllPending()
+                VotingManager.removeAllPending();
                 off();
             });
 

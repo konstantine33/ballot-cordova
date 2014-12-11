@@ -30,20 +30,17 @@ BallotApp.factory('BallotPresenter', function($ionicActionSheet){
                 }
             })
         },
-        noPercent: function(round){
-            if(!this.get('response_count')){
-                return 0;
-            }
-            var perc = this.get('no_count') / this.get('response_count') * 100;
-
-            return round ? Math.round(perc) : perc;
+        getAnswerTitle: function(value){
+            return this.get('answers')[value].title
         },
-        yesPercent: function(round){
+        getAnswerCount: function(value){
+            return this.get('answers')[value].votes
+        },
+        getAnswerPercent: function(value, round){
             if(!this.get('response_count')){
                 return 0;
             }
-            var perc = this.get('yes_count') / this.get('response_count') * 100
-
+            var perc = this.getAnswerCount(value) / this.get('response_count') * 100;
             return round ? Math.round(perc) : perc;
         }
     }

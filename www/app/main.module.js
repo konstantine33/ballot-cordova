@@ -1,8 +1,8 @@
 var BallotApp = angular.module('starter', ['ionic', 'angularMoment', 'LWBusy'])
 
 
-.constant('SERVER_URL', 'http://ballot-server.herokuapp.com')
-    //.constant('SERVER_URL', 'http://localhost:3000')
+//.constant('SERVER_URL', 'http://ballot-server.herokuapp.com')
+    .constant('SERVER_URL', 'http://localhost:3000')
     .constant('$ionicLoadingConfig', {template: '<i class="icon ion-loading-c"></i> Loading...'})
     .config(function ($httpProvider, $provide) {
         $httpProvider.interceptors.push(function ($q, $window, BallotToken) {
@@ -60,7 +60,7 @@ var BallotApp = angular.module('starter', ['ionic', 'angularMoment', 'LWBusy'])
                 controller: "resultsController"
             })
             .state('ballot', {
-                url: "/ballot/:ballot_id?owns",
+                url: "/ballot/:ballot_id",
                 templateUrl: "app/ballot-view/ballot-view.html",
                 controller: "ballotViewController",
                 resolve: {

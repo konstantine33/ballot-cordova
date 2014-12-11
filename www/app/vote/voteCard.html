@@ -8,14 +8,14 @@
     <div class="row">
         <div class="col">
             <button class="button-assertive button button-outline icon ion-ios7-arrow-back icon-left button-block"
-                    ng-click="action(responseType.NO)">
-                No
+                    ng-click="action(responseType.LEFT_RESPONSE)">
+                {{ballot.getAnswerTitle(responseType.LEFT_RESPONSE)}}
             </button>
         </div>
         <div class="col">
             <button class="button-balanced button button-outline icon ion-ios7-arrow-forward icon-right button-block"
-                    ng-click="action(responseType.YES)">
-                Yes
+                    ng-click="action(responseType.RIGHT_RESPONSE)">
+                {{ballot.getAnswerTitle(responseType.RIGHT_RESPONSE)}}
             </button>
         </div>
     </div>
