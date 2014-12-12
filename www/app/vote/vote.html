@@ -1,5 +1,9 @@
 <ion-view title="Vote">
     <ion-content>
+        <ion-nav-buttons side="right">
+            <button class="button button-positive button-clear icon ion-plus" ui-sref="create_ballot">
+            </button>
+        </ion-nav-buttons>
         <voting-cards new-ballots-event="newBallotsEvent" get-ballots-event="getBallotsEvent"></voting-cards>
     </ion-content>
 </ion-view>

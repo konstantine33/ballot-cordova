@@ -1,7 +1,9 @@
 <ion-view title="">
-    <ion-nav-buttons side="right">
-    </ion-nav-buttons>
     <ion-content class="padding">
+        <ion-nav-buttons side="right">
+            <button class="button button-positive button-clear icon ion-plus" ui-sref="create_ballot">
+            </button>
+        </ion-nav-buttons>
         <div class="text-center padding-top">
             <h3>{{ballot.get('question')}}</h3>
         </div>

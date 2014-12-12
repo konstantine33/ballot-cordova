@@ -1,5 +1,9 @@
 <ion-view title="Ballot Results">
     <ion-content class="has-header">
+        <ion-nav-buttons side="right">
+            <button class="button button-positive button-clear icon ion-plus" ui-sref="create_ballot">
+            </button>
+        </ion-nav-buttons>
         <div ng-hide="ballots.length || !loaded" class="padding">
             <div class="card-full-content-center-parent">
                 <div class="content-center-child">
