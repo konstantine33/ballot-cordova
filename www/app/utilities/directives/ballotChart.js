@@ -89,7 +89,9 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
                             },
                             axisX: {
                                 tickThickness: 0,
-                                labelFontSize: 18
+                                labelFontSize: 16,
+                                labelAutofit: true,
+                                labelMaxWidth: 100
                             },
                             data: [
                                 {

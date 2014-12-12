@@ -1,6 +1,6 @@
 BallotApp.controller('createBallotController', function ($scope, Ballot, $window, $state, BusyManager) {
     $scope.maxQuestionLength = 140;
-    $scope.maxAnswerLength = 25;
+    $scope.maxAnswerLength = 20;
     $scope.busy_id = "create_button";
     $scope.form_data = {
         question: "",

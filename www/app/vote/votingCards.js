@@ -94,7 +94,12 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                     this.ballot.respond(response).finally(function(){
                         VotingManager.removePending(self.ballot.getId());
                     });
-                    setNewResultsCard();
+
+                    if(response === Ballot.responseType.SKIP || response === Ballot.responseType.FLAG){
+                        setNewVotingCard();
+                    }else {
+                        setNewResultsCard();
+                    }
                 };
 
                 if (scope.ballots.length) {

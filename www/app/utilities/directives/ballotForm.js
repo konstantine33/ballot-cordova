@@ -15,3 +15,15 @@ BallotApp.directive('bMaxlength', function(){
         }
     }
 });
+
+BallotApp.directive('noCarriageReturn', function(){
+    return {
+        link: function(scope, elem, attrs){
+            elem.on('keydown', function(e){
+                if(e.which == 13) {
+                    e.preventDefault();
+                }
+            })
+        }
+    }
+})
