@@ -4,21 +4,31 @@
             <h2 class="title">{{form_data.error}}</h2>
         </div>
 
-        <form class="list">
-            <label class="item item-input item-stacked-label">
-                <span class="input-label text-muted">Question <small>({{maxQuestionLength - form_data.question.length}})</small></span>
-                <textarea b-maxlength="maxQuestionLength" ng-model="form_data.question" rows="5" no-carriage-return=""></textarea>
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label text-muted">Left Answer Option <small>({{maxAnswerLength - form_data.left_answer.length}})</small></span>
-                <input type="text" ng-model="form_data.left_answer" b-maxlength="maxAnswerLength">
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label text-muted">Right Answer Option <small>({{maxAnswerLength - form_data.right_answer.length}})</small></span>
-                <input type="text" ng-model="form_data.right_answer" b-maxlength="maxAnswerLength">
-            </label>
+        <form>
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label text-muted">Question <small>({{maxQuestionLength -
+                        form_data.question.length}})
+                    </small></span>
+                    <textarea b-maxlength="maxQuestionLength" ng-model="form_data.question" rows="5"
+                              no-carriage-return=""></textarea>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label text-muted">Left Answer Option <small>({{maxAnswerLength -
+                        form_data.left_answer.length}})
+                    </small></span>
+                    <input type="text" ng-model="form_data.left_answer" b-maxlength="maxAnswerLength">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label text-muted">Right Answer Option <small>({{maxAnswerLength -
+                        form_data.right_answer.length}})
+                    </small></span>
+                    <input type="text" ng-model="form_data.right_answer" b-maxlength="maxAnswerLength">
+                </label>
+            </div>
+            <button type="submit" class="button button-block button-full button-positive" ng-click="done($event)"
+                   busy-button="Saving..." busy-id="busy_id">Create Ballot</button>
         </form>
 
-        <button class="button button-full button-positive" ng-click="done()" busy-button="Saving..." busy-id="busy_id">Create Ballot</button>
     </ion-content>
 </ion-view>

@@ -11,7 +11,9 @@ BallotApp.controller('createBallotController', function ($scope, Ballot, $window
 
 
 
-    $scope.done = function () {
+    $scope.done = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
 
         if (!$scope.form_data.question) {
             $scope.form_data.error = "Please enter a question";
