@@ -29,6 +29,9 @@
   display: table-cell;
   vertical-align: middle; }
 
+.break-word {
+  word-wrap: break-word; }
+
 .card-stack {
   position: absolute;
   top: 30px;
@@ -59,8 +62,24 @@
   top: 35%;
   bottom: 8%;
   width: 100%; }
-  .vote-card-action .button-bar {
+  .vote-card-action .vote-card-button-row {
+    padding: 0;
     height: 100%; }
+  .vote-card-action .vote-card-button-col {
+    padding: 0;
+    height: 100%; }
+  .vote-card-action .vote-card-button {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: normal;
+    line-height: 24px;
+    word-wrap: break-word;
+    padding: 0; }
+    .vote-card-action .vote-card-button p {
+      margin-bottom: 20px;
+      padding: 5px; }
 
 .vote-card-footer {
   position: absolute;

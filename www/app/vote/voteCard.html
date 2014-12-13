@@ -1,25 +1,38 @@
 <div class="vote-card-question">
     <div class="content-center-parent">
         <div class="content-center-child">
-            <h2 style="font-size: 18px">{{ballot.get('question')}}</h2>
+            <h2 style="font-size: 18px" class="break-word">{{ballot.get('question')}}</h2>
         </div>
     </div>
 </div>
 <div class="vote-card-action">
 
-    <div class="button-bar">
-        <button class="button-positive button icon ion-ios7-arrow-back icon-left"
-                ng-click="action(responseType.LEFT_RESPONSE)">
-            {{ballot.getAnswerTitle(responseType.LEFT_RESPONSE)}}
-        </button>
-
-
-        <button class="button-balanced button icon ion-ios7-arrow-forward icon-right"
-                ng-click="action(responseType.RIGHT_RESPONSE)">
-            {{ballot.getAnswerTitle(responseType.RIGHT_RESPONSE)}}
-        </button>
+    <div class="row vote-card-button-row">
+        <div class="col vote-card-button-col">
+            <div class="button-positive button vote-card-button button-full"
+                 ng-click="action(responseType.LEFT_RESPONSE)">
+                <div style="padding: 10px; height: 100%;">
+                    <div class="content-center-parent">
+                        <div class="content-center-child">
+                            <p class="vote-card-button-text">{{ballot.getAnswerTitle(responseType.LEFT_RESPONSE)}}</p>
+                            <span class="icon ion-ios7-arrow-back"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col vote-card-button-col">
+            <div class="button-balanced button button-full vote-card-button"
+                 ng-click="action(responseType.RIGHT_RESPONSE)">
+                <div class="content-center-parent">
+                    <div class="content-center-child">
+                        <p class="vote-card-button-text">{{ballot.getAnswerTitle(responseType.RIGHT_RESPONSE)}}</p>
+                        <span class="icon ion-ios7-arrow-forward"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>
 <div class="vote-card-footer">
     <div class="content-center-parent">

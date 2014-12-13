@@ -38,8 +38,30 @@ $vote-footer-height: 100% - $vote-question-height - $vote-action-height;
   bottom: $vote-footer-height;
   width: 100%;
 
-  .button-bar {
+  .vote-card-button-row{
+    padding: 0;
     height: 100%;
+  }
+
+  .vote-card-button-col {
+    padding: 0;
+    height: 100%;
+  }
+
+  .vote-card-button {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: normal;
+    line-height: 24px;
+    word-wrap: break-word;
+    padding: 0;
+
+    p {
+      margin-bottom: 20px;
+      padding: 5px;
+    }
   }
 }
 
