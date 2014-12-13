@@ -1,12 +1,8 @@
-<div class="content-center-parent">
-    <div class="content-center-child">
-        <h4 class="text-center">{{ballot.get('question')}}</h4>
-        <ballot-chart ballot="ballot" height="300"></ballot-chart>
-
-        <button class="button-positive button button-full button-small" ng-click="action()">
-            Continue
-        </button>
-    </div>
+<h4 class="text-center">{{ballot.get('question')}}</h4>
+<div class="padding-vertical">
+    <ballot-chart ballot="ballot" height="300"></ballot-chart>
 </div>
-
+<button class="button-positive button button-full button-small" ng-click="action()">
+    Continue
+</button>
 
