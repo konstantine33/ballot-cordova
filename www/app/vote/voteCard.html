@@ -11,25 +11,15 @@
         <div class="col vote-card-button-col">
             <div class="button-positive button vote-card-button button-full"
                  ng-click="action(responseType.LEFT_RESPONSE)">
-                <div style="padding: 10px; height: 100%;">
-                    <div class="content-center-parent">
-                        <div class="content-center-child">
-                            <p class="vote-card-button-text">{{ballot.getAnswerTitle(responseType.LEFT_RESPONSE)}}</p>
-                            <span class="icon ion-ios7-arrow-back"></span>
-                        </div>
-                    </div>
-                </div>
+                <p class="vote-card-button-text">{{ballot.getAnswerTitle(responseType.LEFT_RESPONSE)}}</p>
+                <span class="vote-card-button-icon icon ion-ios7-arrow-back"></span>
             </div>
         </div>
         <div class="col vote-card-button-col">
             <div class="button-balanced button button-full vote-card-button"
                  ng-click="action(responseType.RIGHT_RESPONSE)">
-                <div class="content-center-parent">
-                    <div class="content-center-child">
-                        <p class="vote-card-button-text">{{ballot.getAnswerTitle(responseType.RIGHT_RESPONSE)}}</p>
-                        <span class="icon ion-ios7-arrow-forward"></span>
-                    </div>
-                </div>
+                <p class="vote-card-button-text">{{ballot.getAnswerTitle(responseType.RIGHT_RESPONSE)}}</p>
+                <span class="vote-card-button-icon icon ion-ios7-arrow-forward"></span>
             </div>
         </div>
     </div>

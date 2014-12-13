@@ -76,10 +76,19 @@
     white-space: normal;
     line-height: 24px;
     word-wrap: break-word;
-    padding: 0; }
-    .vote-card-action .vote-card-button p {
-      margin-bottom: 20px;
+    padding: 0;
+    position: relative; }
+    .vote-card-action .vote-card-button .vote-card-button-text {
+      position: absolute;
+      top: 25%;
+      left: 10px;
+      right: 10px;
       padding: 5px; }
+    .vote-card-action .vote-card-button .vote-card-button-icon {
+      position: absolute;
+      bottom: 25%;
+      left: 10px;
+      right: 10px; }
 
 .vote-card-footer {
   position: absolute;
