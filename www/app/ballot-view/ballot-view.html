@@ -1,14 +1,17 @@
 <ion-view title="">
-    <ion-content class="padding">
-        <ion-nav-buttons side="right">
-            <button class="button button-positive button-clear icon ion-plus" ui-sref="create_ballot">
-            </button>
-        </ion-nav-buttons>
-        <div class="text-center padding-top">
-            <h3>{{ballot.get('question')}}</h3>
+    <ion-nav-buttons side="right">
+        <button class="button button-positive button-clear icon ion-plus" ui-sref="create_ballot">
+        </button>
+    </ion-nav-buttons>
+    <ion-content scroll="false">
+        <div class="content-full">
+            <div class="text-center padding-top">
+                <h3>{{ballot.get('question')}}</h3>
+            </div>
+            <ballot-chart ballot="ballot" height="300"></ballot-chart>
+            <div class="padding-vertical">
+                <button class="button button-full button-positive" ng-click="back()">Back</button>
+            </div>
         </div>
-        <ballot-chart ballot="ballot" height="300"></ballot-chart>
-
-        <button class="button button-block button-positive" ng-click="back()">Back</button>
     </ion-content>
 </ion-view>

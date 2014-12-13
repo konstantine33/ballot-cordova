@@ -1,14 +1,16 @@
-<div ng-show="loaded">
+<div ng-show="loaded" class="content-full">
     <ul class="card-stack">
-        <li class="vote-card">
-            <div ng-hide="!!current_card" class="padding">
-                <div class="card-full-content-center-parent">
-                    <div class="content-center-child">
-                        <h3 class="text-muted">There are currently no more ballots for you to vote on.</h3>
-                        <button class="button button-positive button-block" ui-sref="create_ballot" style="margin-top: 50px">Ask a Question</button>
-                    </div>
+        <li class="vote-card" ng-hide="!!current_card">
+
+            <div class="content-center-parent">
+                <div class="content-center-child padding">
+                    <h3 class="text-muted">There are currently no more ballots for you to vote on.</h3>
+                    <button class="button button-positive button-full" ui-sref="create_ballot"
+                            style="margin-top: 50px">Ask a Question
+                    </button>
                 </div>
             </div>
+
         </li>
     </ul>
 </div>

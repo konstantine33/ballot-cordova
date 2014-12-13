@@ -1,0 +1,53 @@
+//For use with content-full
+.card-stack {
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+}
+
+$vote-question-height: 35%;
+$vote-action-height: 57%;
+$vote-footer-height: 100% - $vote-question-height - $vote-action-height;
+
+.vote-card {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border-radius: 2px;
+  border: 1px solid rgb(200,200,200);
+}
+
+.vote-card-question {
+  position: absolute;
+  top: 0;
+  height: $vote-question-height;
+  width: 100%;
+}
+
+.vote-card-action {
+  position: absolute;
+  top: $vote-question-height;
+  bottom: $vote-footer-height;
+  width: 100%;
+
+  .button-bar {
+    height: 100%;
+  }
+}
+
+
+.vote-card-footer {
+  position:absolute;
+  top: $vote-question-height + $vote-action-height;
+  height: $vote-footer-height;
+  width: 100%;
+  border-top: 1px solid rgb(200,200,200);
+}

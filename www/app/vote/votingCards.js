@@ -1,6 +1,6 @@
 BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCache, Ballot, $window, VotingManager) {
-    var voting_card_template = "<li voting-card></li>";
-    var results_card_template = "<li results-card></li>";
+    var voting_card_template = '<li voting-card class="vote-card"></li>';
+    var results_card_template = '<li results-card class="vote-card"></li>';
 
 
     return {
