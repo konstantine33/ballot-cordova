@@ -73,6 +73,10 @@ var BallotApp = angular.module('starter', ['ionic', 'angularMoment', 'LWBusy'])
                         return Ballot.findById($stateParams.ballot_id)
                     }
                 }
+            })
+            .state('groups', {
+                url: "/groups",
+                templateUrl: "app/groups/groups.html"
             });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/auth');
