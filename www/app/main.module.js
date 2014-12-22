@@ -26,6 +26,11 @@ var BallotApp = angular.module('starter', ['ionic', 'angularMoment', 'LWBusy'])
                     if(error.status === 0){
                         message = "Internet connection was lost. Please connect to the internet then restart Ballot."
                     }
+
+                    //TODO: Build an error handling system at some point. This is just a hack for now
+                    if(error.data && error.data.indexOf && !!~error.data.indexOf('characters long')){
+                        message = error.data;
+                    }
                     alert(message);
 
                     return $q.reject(error)
