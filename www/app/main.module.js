@@ -1,8 +1,8 @@
 var BallotApp = angular.module('starter', ['ionic', 'angularMoment', 'LWBusy'])
 
 
-.constant('SERVER_URL', 'http://ballot-server.herokuapp.com')
-    //.constant('SERVER_URL', 'http://localhost:3000')
+//.constant('SERVER_URL', 'http://ballot-server.herokuapp.com')
+    .constant('SERVER_URL', 'http://localhost:3000')
     .constant('$ionicLoadingConfig', {template: '<i class="icon ion-loading-c"></i> Loading...'})
     .config(function ($httpProvider, $provide) {
         $httpProvider.interceptors.push(function ($q, $window, BallotToken) {
@@ -40,9 +40,9 @@ var BallotApp = angular.module('starter', ['ionic', 'angularMoment', 'LWBusy'])
     })
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('auth', {
-                url: '/auth',
-                controller: 'authController'
+            .state('index', {
+                url: '/',
+                controller: 'indexController'
             })
             .state('vote', {
                 url: "/vote",
@@ -79,7 +79,7 @@ var BallotApp = angular.module('starter', ['ionic', 'angularMoment', 'LWBusy'])
                 templateUrl: "app/groups/groups.html"
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/auth');
+        $urlRouterProvider.otherwise('/');
 
     });
 

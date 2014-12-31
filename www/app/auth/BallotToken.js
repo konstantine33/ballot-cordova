@@ -1,14 +1,14 @@
 BallotApp.factory('BallotToken', function($window){
     function getToken(){
-        return $window.sessionStorage.ballot_token
+        return $window.localStorage.ballot_token
     }
 
     function storeToken(token){
-        $window.sessionStorage.ballot_token = token;
+        $window.localStorage.ballot_token = token;
     }
 
     function deleteToken(){
-        delete $window.sessionStorage.ballot_token;
+        delete $window.localStorage.ballot_token;
     }
 
     return {

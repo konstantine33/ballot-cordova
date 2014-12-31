@@ -1,4 +1,4 @@
-BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, BallotToken) {
+BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, BallotToken, $ionicPlatform) {
     var BALLOT_KEYCHAIN = "ballot_account_id";
     var BALLOT_SERVICE_NAME = "com.getballot";
 
@@ -13,25 +13,29 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
     }
 
 
-    function authenticate() {
+    /** Checks for Android uuid or creates & sets/gets iOS keychain value
+     Then uses that value to login with the server. Once successful, a token is stored.
+
+     Returns: Promsie
+     */
+    function login() {
         var deferred = $q.defer();
         var authenticator;
 
-        //Android only
-        if ($window.device && $window.device.uuid) {
-            if ($window.device.platform === "Android" && $window.device.uuid) {
+        $ionicPlatform.ready(function () {
+            if ($window.device && $window.device.platform === "Android" && $window.device.uuid) {
                 authenticator = $window.device.uuid;
                 deferred.resolve();
 
-            } else if ($window.device.platform === "iOS" && $window.Keychain) {
+            } else if ($window.device && $window.device.platform === "iOS" && $window.Keychain) {
                 var keychain = new Keychain();
 
-                function setValue(){
+                function setValue() {
                     var new_id = makeid(25);
                     keychain.setForKey(function () {
                         authenticator = new_id;
                         return deferred.resolve();
-                    }, function(e){
+                    }, function (e) {
                         return deferred.reject('Unable to set keychain value')
                     }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME, new_id)
                 }
@@ -49,22 +53,34 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
                     setValue()
                 }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME)
 
+            } else {
+                //For development
+                authenticator = "test12345678901";
+                deferred.resolve();
             }
-        } else {
-            authenticator = "test1234567890";
-            deferred.resolve();
-        }
+        });
 
-        return deferred.promise.then(function(){
+
+        return deferred.promise.then(function () {
             return $http.post(SERVER_URL + '/auth', {authenticator: authenticator})
-                .then(function(response){
+                .then(function (response) {
                     BallotToken.store(response.data.token);
-                }, function(e){
+                }, function (e) {
                     BallotToken.del();
                     return $q.reject(e);
                 })
         });
+    }
 
+    //Authenticates if necessary
+    function authenticate() {
+        if(!BallotToken.get()){
+            return login();
+        }else {
+            return $http.post(SERVER_URL + '/check-auth').catch(function(){
+                return login();
+            })
+        }
     }
 
     return authenticate

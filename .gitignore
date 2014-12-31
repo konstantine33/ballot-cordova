@@ -6,3 +6,4 @@ platforms/
 .idea
 .idea/*
 .DS_Store
+*.rdb
