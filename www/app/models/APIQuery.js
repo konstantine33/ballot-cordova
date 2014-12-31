@@ -1,4 +1,4 @@
-BallotApp.factory('APIQuery', function ($q, Request) {
+BallotApp.factory('APIQuery', function (Request) {
     /**  ----- Constant Home Javascript Query API -----
      *
      *  Uses APIQuery object to construct a query to database
@@ -42,15 +42,15 @@ BallotApp.factory('APIQuery', function ($q, Request) {
      * @returns promise
      */
     APIQuery.prototype.next = function (count) {
-
-        var deferred = $q.defer();
         var self = this;
         var param_obj = this.buildParams(count);
-        Request({
+        return Request({
             method: "GET",
             url: self.url,
             params: param_obj
-        }).success(function (data) {
+        }).then(function (response) {
+            var data = response.data;
+
             var model_list = [];
 
             if (self.Model) {
@@ -63,30 +63,22 @@ BallotApp.factory('APIQuery', function ($q, Request) {
                 self.cursor += data.length;
             }
 
-            deferred.resolve(model_list);
+            return model_list
         })
-            .error(function (e) {
-                deferred.reject(e);
-            });
-
-        return deferred.promise;
     };
 
     APIQuery.prototype.checkHasNext = function() {
-        var deferred = $q.defer();
         var self = this;
         var hasNext;
 
-        this.next(1)
+        return this.next(1)
             .then(function(list) {
                 hasNext = list.length > 0;
                 if (hasNext) {
                     self.cursor--;
                 }
-                deferred.resolve(hasNext);
+                return hasNext;
             });
-
-        return deferred.promise;
     };
 
     /**
@@ -96,48 +88,39 @@ BallotApp.factory('APIQuery', function ($q, Request) {
      * @returns {*}
      */
     APIQuery.prototype.one = function(){
-        var deferred = $q.defer();
         var self = this;
         var params_obj = this.buildParams(1);
         params_obj.query_type = "findOne";
 
-        Request({
+        return Request({
             method: "GET",
             url: self.url,
             params: {q: JSON.stringify(params_obj), 'cb': new Date().getTime()}
-        }).success(function (data) {
+        }).then(function (response) {
+            var data = response.data;
             if(data && self.Model){
-                deferred.resolve(new self.Model(data))
+                return new self.Model(data)
             }else {
-                deferred.resolve(data)
+                return data;
             }
         })
-            .error(function (e) {
-                deferred.reject(e);
-            });
-        return deferred.promise;
     };
 
     APIQuery.prototype.count = function(){
-        var deferred = $q.defer();
-
         var self = this;
         var params_obj = {
             params: self._config.params,
             query_type: 'count'
         };
 
-        Request({
+        return Request({
             method: "GET",
             url: self.url,
             params: {q: JSON.stringify(params_obj), 'cb': new Date().getTime()}
-        }).success(function (data) {
-            deferred.resolve(data);
+        }).then(function(data){
+            return data;
         })
-            .error(function (e) {
-                deferred.reject(e);
-            });
-        return deferred.promise;
+
     };
 
     APIQuery.prototype.buildParams = function(count){

@@ -1,3 +1,11 @@
+/**
+ * Wrapper around $http used to make API calls within "authenticated" areas. It will automatically refresh the token and
+ * re-send request if the server says authentication token failed
+ *
+ * NOTE:
+ * .success and .fail methods are not available
+ */
+
 BallotApp.factory('Request', function($http, Authenticate){
     function Request(config){
         return $http(config).then(function(response){

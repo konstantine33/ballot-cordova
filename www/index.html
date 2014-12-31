@@ -23,6 +23,9 @@
     <script src="lib/angular-moment/angular-moment.min.js"></script>
     <script src="lib/swing/dist/swing.min.js"></script>
     <script src="app/main.module.js"></script>
+    <script src="app/config/config.js"></script>
+    <script src="app/config/constants.js"></script>
+    <script src="app/config/states.js"></script>
     <script src="app/appController.js"></script>
 
     <!-- External Modules -->
@@ -30,8 +33,6 @@
 
     <script src="app/auth/Authenticate.js"></script>
     <script src="app/auth/BallotToken.js"></script>
-    <script src="app/index/indexController.js"></script>
-
 
     <script src="app/models/Ballot.js"></script>
     <script src="app/models/BallotPresenter.js"></script>
@@ -57,7 +58,7 @@
 </head>
 <body ng-app="starter" ng-controller="appController">
 
-<ion-side-menus>
+<ion-side-menus ng-hide="loading">
     <ion-side-menu-content drag-content="false">
         <ion-nav-bar class="bar-light">
             <button class="button button-positive button-clear icon ion-navicon" menu-toggle="left"></button>

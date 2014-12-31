@@ -55,7 +55,7 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
 
             } else {
                 //For development
-                authenticator = "test12345678901";
+                authenticator = "test1234567890";
                 deferred.resolve();
             }
         });
