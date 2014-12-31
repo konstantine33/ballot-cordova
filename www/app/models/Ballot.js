@@ -1,4 +1,4 @@
-BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPresenter, VotingManager) {
+BallotApp.factory('Ballot', function (SERVER_URL, Request, $q, APIQuery, BallotPresenter, VotingManager) {
     function Ballot(data) {
         this.data = data || {};
         this.url = Ballot.url + "/" + this.data._id;
@@ -15,7 +15,7 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
     //Ballot.prototype.close = function () {
     //    this.data.closed = true;
     //    this.data.closed_on = new Date();
-    //    return $http.post(this.url + "/close").then(function (response) {
+    //    return Request.post(this.url + "/close").then(function (response) {
     //        return response.data
     //    })
     //};
@@ -24,7 +24,7 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
         if (this.get('closed')) {
             return $q.reject('You cannot delete a closed ballot.')
         }
-        return $http.delete(this.url).then(function (response) {
+        return Request.delete(this.url).then(function (response) {
             return response.data
         })
 
@@ -58,7 +58,7 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
                 }
         }
 
-        var promise = $http.post(this.url + "/respond", {response: value});
+        var promise = Request.post(this.url + "/respond", {response: value});
 
         return promise.then(function (response) {
             return response.data
@@ -67,7 +67,7 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
 
     Ballot.prototype.refresh = function () {
         var self = this;
-        return $http.get(this.url).then(function (response) {
+        return Request.get(this.url).then(function (response) {
             self.data = response.data;
         })
     };
@@ -95,13 +95,13 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
 
     //Responds with a promise that resolves to the model
     Ballot.findById = function (id) {
-        return $http.get(Ballot.url + "/" + id).then(function (result) {
+        return Request.get(Ballot.url + "/" + id).then(function (result) {
             return new Ballot(result.data)
         })
     };
 
     Ballot.recommend = function (count) {
-        return $http.get(Ballot.url + "/rec", {
+        return Request.get(Ballot.url + "/rec", {
             params: {
                 limit: count,
                 exclude: JSON.stringify(VotingManager.getPending())
@@ -125,7 +125,7 @@ BallotApp.factory('Ballot', function (SERVER_URL, $http, $q, APIQuery, BallotPre
         ballot_data.right_answer = right_answer;
 
 
-        return $http.post(Ballot.url, ballot_data).then(function (response) {
+        return Request.post(Ballot.url, ballot_data).then(function (response) {
                 if (response.data) {
                     return new Ballot(response.data)
                 }

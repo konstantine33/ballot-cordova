@@ -1,4 +1,4 @@
-BallotApp.factory('APIQuery', function ($q, $http) {
+BallotApp.factory('APIQuery', function ($q, Request) {
     /**  ----- Constant Home Javascript Query API -----
      *
      *  Uses APIQuery object to construct a query to database
@@ -46,7 +46,7 @@ BallotApp.factory('APIQuery', function ($q, $http) {
         var deferred = $q.defer();
         var self = this;
         var param_obj = this.buildParams(count);
-        $http({
+        Request({
             method: "GET",
             url: self.url,
             params: param_obj
@@ -101,7 +101,7 @@ BallotApp.factory('APIQuery', function ($q, $http) {
         var params_obj = this.buildParams(1);
         params_obj.query_type = "findOne";
 
-        $http({
+        Request({
             method: "GET",
             url: self.url,
             params: {q: JSON.stringify(params_obj), 'cb': new Date().getTime()}
@@ -127,7 +127,7 @@ BallotApp.factory('APIQuery', function ($q, $http) {
             query_type: 'count'
         };
 
-        $http({
+        Request({
             method: "GET",
             url: self.url,
             params: {q: JSON.stringify(params_obj), 'cb': new Date().getTime()}
