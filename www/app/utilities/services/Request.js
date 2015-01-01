@@ -6,7 +6,7 @@
  * .success and .fail methods are not available
  */
 
-BallotApp.factory('Request', function($http, Authenticate){
+BallotApp.factory('Request', function($http, $q, Authenticate){
     function Request(config){
         return $http(config).then(function(response){
             return response
