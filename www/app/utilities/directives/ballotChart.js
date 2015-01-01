@@ -41,8 +41,8 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
             var height = scope.height || 400;
 
             //Adds the required elements
-            var chart_elem = '<div style="height:' + height + 'px" ng-show="ballot.get(\'response_count\')" id="' + id + '"></div>';
-            var no_responses = '<div style="height:' + height + 'px"class="content-center-parent" ng-hide="ballot.get(\'response_count\')"><div class="content-center-child"><h3 class="text-muted">There are no responses to this ballot.</h3></div></div>'
+            var chart_elem = '<div style="height:' + height + 'px" ng-show="ballot.get(\'answer_count\')" id="' + id + '"></div>';
+            var no_responses = '<div style="height:' + height + 'px"class="content-center-parent" ng-hide="ballot.get(\'answer_count\')"><div class="content-center-child"><h3 class="text-muted">There are no responses to this ballot.</h3></div></div>'
             elem.append($compile(no_responses)(scope));
             elem.append($compile(chart_elem)(scope));
 
@@ -71,7 +71,7 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
 
 
             //If there are no responses, don't bother generating the chart
-            var off = scope.$watch('ballot.data.response_count', function (newVal) {
+            var off = scope.$watch('ballot.data.answer_count', function (newVal) {
                 if (newVal) {
                     off();
 

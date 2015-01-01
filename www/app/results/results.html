@@ -18,7 +18,7 @@
         <ion-list>
             <a class="item" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId()})">
                 {{ballot.get('question')}}
-                <p class="text-muted">Votes: {{ballot.get('response_count')}}</p>
+                <p class="text-muted">Votes: {{ballot.get('answer_count')}}</p>
             </a>
         </ion-list>
         <ion-infinite-scroll on-infinite="getMore()" distance="10%" ng-if="hasMore"></ion-infinite-scroll>

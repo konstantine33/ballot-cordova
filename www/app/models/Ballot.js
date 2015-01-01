@@ -37,7 +37,7 @@ BallotApp.factory('Ballot', function (SERVER_URL, Request, $q, APIQuery, BallotP
         }
 
         answer.votes ++;
-        this.data.response_count ++;
+        this.data.answer_count ++;
     };
 
     Ballot.prototype.respond = function (value) {

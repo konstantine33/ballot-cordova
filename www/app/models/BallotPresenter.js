@@ -37,10 +37,10 @@ BallotApp.factory('BallotPresenter', function($ionicActionSheet){
             return this.get('answers')[value].votes
         },
         getAnswerPercent: function(value, round){
-            if(!this.get('response_count')){
+            if(!this.get('answer_count')){
                 return 0;
             }
-            var perc = this.getAnswerCount(value) / this.get('response_count') * 100;
+            var perc = this.getAnswerCount(value) / this.get('answer_count') * 100;
             return round ? Math.round(perc) : perc;
         }
     }
