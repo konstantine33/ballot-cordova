@@ -17,23 +17,18 @@
   position: relative;
 }
 
-
-
-//centering images
-@mixin content-center-parent($width: 100%, $height: 100%) {
-  display: table;
-  text-align: center;
-  width: $width;
-  height: $height;
-  overflow: hidden;
+@mixin vertical-center() {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
-.content-center-parent {
-  @include content-center-parent()
-}
-
-.content-center-parent-default{
-  @include content-center-parent(100%, 400px)
+@mixin vertical-center-parent(){
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 .content-center-child {

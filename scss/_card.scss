@@ -17,10 +17,6 @@ $vote-action-height: 100% - $vote-question-height - $vote-footer-height;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: white;
-
-  padding-top: 1px;
-  padding-bottom: 1px;
   border-radius: 2px;
   border: 1px solid rgb(200,200,200);
 }
@@ -30,7 +26,14 @@ $vote-action-height: 100% - $vote-question-height - $vote-footer-height;
   top: 0;
   height: $vote-question-height;
   width: 100%;
-
+  .poll-question {
+    @include vertical-center();
+    text-align: center;
+    font-size: 20px;
+    color: $royal;
+    word-wrap: break-word;
+    width: 100%;
+  }
 }
 
 .vote-card-action {
