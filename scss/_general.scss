@@ -44,3 +44,17 @@
 .break-word {
   word-wrap: break-word;
 }
+
+.tally-nav-bar {
+  border-color: $royal !important;
+  border-bottom-width: 2px;
+
+  .tally-logo {
+    height: 40px;
+  }
+}
+
+.tally-side-logo {
+  height: 40px;
+  padding: 10px 0;
+}

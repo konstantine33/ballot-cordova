@@ -1,15 +1,15 @@
 //For use with content-full
 .card-stack {
   position: absolute;
-  top: 30px;
-  bottom: 30px;
-  left: 30px;
-  right: 30px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-$vote-question-height: 35%;
-$vote-action-height: 57%;
-$vote-footer-height: 100% - $vote-question-height - $vote-action-height;
+$vote-question-height: 65%;
+$vote-footer-height: 8%;
+$vote-action-height: 100% - $vote-question-height - $vote-footer-height;
 
 .vote-card {
   position: absolute !important;
@@ -30,6 +30,7 @@ $vote-footer-height: 100% - $vote-question-height - $vote-action-height;
   top: 0;
   height: $vote-question-height;
   width: 100%;
+
 }
 
 .vote-card-action {
@@ -44,7 +45,6 @@ $vote-footer-height: 100% - $vote-question-height - $vote-action-height;
   }
 
   .vote-card-button-col {
-    padding: 0;
     height: 100%;
   }
 
@@ -82,5 +82,4 @@ $vote-footer-height: 100% - $vote-question-height - $vote-action-height;
   top: $vote-question-height + $vote-action-height;
   height: $vote-footer-height;
   width: 100%;
-  border-top: 1px solid rgb(200,200,200);
 }

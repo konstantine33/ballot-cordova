@@ -32,12 +32,22 @@
 .break-word {
   word-wrap: break-word; }
 
+.tally-nav-bar {
+  border-color: #663399 !important;
+  border-bottom-width: 2px; }
+  .tally-nav-bar .tally-logo {
+    height: 40px; }
+
+.tally-side-logo {
+  height: 40px;
+  padding: 10px 0; }
+
 .card-stack {
   position: absolute;
-  top: 30px;
-  bottom: 30px;
-  left: 30px;
-  right: 30px; }
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; }
 
 .vote-card {
   position: absolute !important;
@@ -54,19 +64,18 @@
 .vote-card-question {
   position: absolute;
   top: 0;
-  height: 35%;
+  height: 65%;
   width: 100%; }
 
 .vote-card-action {
   position: absolute;
-  top: 35%;
+  top: 65%;
   bottom: 8%;
   width: 100%; }
   .vote-card-action .vote-card-button-row {
     padding: 0;
     height: 100%; }
   .vote-card-action .vote-card-button-col {
-    padding: 0;
     height: 100%; }
   .vote-card-action .vote-card-button {
     height: 100%;
@@ -94,5 +103,4 @@
   position: absolute;
   top: 92%;
   height: 8%;
-  width: 100%;
-  border-top: 1px solid #c8c8c8; }
+  width: 100%; }

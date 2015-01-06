@@ -11,6 +11,10 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -20,6 +24,9 @@
     "installed_plugins": {
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.ionicframework.refer194649"
+        },
+        "org.apache.cordova.splashscreen": {
+            "PACKAGE_NAME": "com.getballot"
         }
     },
     "dependent_plugins": {}

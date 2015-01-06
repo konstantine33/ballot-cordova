@@ -60,22 +60,23 @@
 
 <ion-side-menus ng-hide="loading">
     <ion-side-menu-content drag-content="false">
-        <ion-nav-bar class="bar-light">
-            <button class="button button-positive button-clear icon ion-navicon" menu-toggle="left"></button>
+        <ion-nav-bar class="bar-light tally-nav-bar">
+            <button class="button button-royal button-clear icon ion-navicon" menu-toggle="left"></button>
+            <h1 class="title"><img class="title-image tally-logo" src="images/title.png"></h1>
         </ion-nav-bar>
         <ion-nav-view animation="no-animation"></ion-nav-view>
     </ion-side-menu-content>
 
     <ion-side-menu side="left">
-        <ion-header-bar class="bar-positive">
-            <h1 class="title">Ballot</h1>
+        <ion-header-bar class="bar-royal">
+            <h1 class="title"><img class="tally-side-logo" src="images/tally-mask.png"></h1>
         </ion-header-bar>
         <ion-content>
             <ul class="list">
                 <a class="item" ui-sref="vote" menu-close>Vote</a>
                 <a class="item" ui-sref="create_ballot" menu-close>Ask a Question</a>
-                <a class="item" ui-sref="my_ballots" menu-close>My Ballots</a>
-                <a class="item" ui-sref="results" menu-close>Poll Results</a>
+                <a class="item" ui-sref="my_ballots" menu-close>My Polls</a>
+                <a class="item" ui-sref="results" menu-close>Answered Polls</a>
                 <a class="item" ui-sref="groups" menu-close>Manage Groups</a>
             </ul>
         </ion-content>
