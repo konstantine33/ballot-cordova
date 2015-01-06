@@ -1,8 +1,12 @@
-<h4 class="text-center">{{ballot.get('question')}}</h4>
 <div class="padding-vertical">
-    <ballot-chart ballot="ballot" height="300"></ballot-chart>
+    <h4 class="text-center">{{ballot.get('question')}}</h4>
 </div>
-<button class="button-positive button button-full button-small" ng-click="action()">
-    Continue
-</button>
+<ballot-chart ballot="ballot" height="300"></ballot-chart>
+
+<div class="padding">
+    <button class="button-royal button button-block" ng-click="action()">
+        Next Poll <i class="icon ion-ios7-arrow-right" style="margin-left: 10px"></i>
+    </button>
+</div>
+
 

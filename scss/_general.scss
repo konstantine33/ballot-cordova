@@ -17,6 +17,18 @@
   position: relative;
 }
 
+@mixin full-page() {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.full-page {
+  @include full-page()
+}
+
 @mixin vertical-center() {
   position: relative;
   top: 50%;
@@ -31,9 +43,12 @@
   transform-style: preserve-3d;
 }
 
-.content-center-child {
-  display: table-cell;
-  vertical-align: middle;
+.vertical-center {
+  @include vertical-center()
+}
+
+.vertical-center-parent {
+  @include vertical-center-parent();
 }
 
 .break-word {
@@ -52,4 +67,8 @@
 .tally-side-logo {
   height: 40px;
   padding: 10px 0;
+}
+
+.safe-height {
+  height: $safe-height;
 }

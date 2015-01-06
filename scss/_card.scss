@@ -12,11 +12,7 @@ $vote-footer-height: 8%;
 $vote-action-height: 100% - $vote-question-height - $vote-footer-height;
 
 .vote-card {
-  position: absolute !important;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  @include full-page();
   border-radius: 2px;
   border: 1px solid rgb(200,200,200);
 }
