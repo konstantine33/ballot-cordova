@@ -43,6 +43,7 @@ $darken-perc: 15%;
     color: $royal;
     word-wrap: break-word;
     width: 100%;
+    padding: 0 15px;
   }
 }
 
@@ -96,7 +97,7 @@ $darken-perc: 15%;
       color: white;
       font-size: 16px;
       background-color: $poll-answer-right-color;
-      &:active, &:hover {
+      &.active, &.activated {
         background-color: darken($poll-answer-right-color, $darken-perc);
       }
     }
@@ -112,7 +113,7 @@ $darken-perc: 15%;
       color: white;
       font-size: 16px;
       background-color: $poll-answer-left-color;
-      &:active, &:hover {
+      &.active, &.activated {
         background-color: darken($poll-answer-left-color, $darken-perc);
       }
     }
@@ -128,7 +129,7 @@ $darken-perc: 15%;
       font-size: 14px;
       background-color: $stable;
       border: 1px solid darken($stable, $darken-perc);
-      &:active, &:hover {
+      &.active, &.activated {
         background-color: darken($stable, $darken-perc);
       }
     }
@@ -144,7 +145,7 @@ $darken-perc: 15%;
       font-size: 18px;
       background-color: $light;
       border: 1px solid darken($light, $darken-perc);
-      &:active, &:hover {
+      &.active, &.activated {
         border-color: lighten($assertive, 20%);
         background-color: lighten($assertive, 20%);
       }

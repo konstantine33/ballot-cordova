@@ -46,6 +46,9 @@
 .safe-height {
   height: 400px; }
 
+.canvasjs-chart-credit {
+  display: none !important; }
+
 .card-stack {
   position: absolute;
   top: 0;
@@ -80,7 +83,8 @@
     font-size: 24px;
     color: #663399;
     word-wrap: break-word;
-    width: 100%; }
+    width: 100%;
+    padding: 0 15px; }
 
 .poll-answer-container {
   position: absolute;
@@ -126,7 +130,7 @@
       color: white;
       font-size: 16px;
       background-color: #33cd5f; }
-      .poll-answer-container .poll-answer-button-right .poll-answer-button:active, .poll-answer-container .poll-answer-button-right .poll-answer-button:hover {
+      .poll-answer-container .poll-answer-button-right .poll-answer-button.active, .poll-answer-container .poll-answer-button-right .poll-answer-button.activated {
         background-color: #239042; }
   .poll-answer-container .poll-answer-button-left {
     width: 105px;
@@ -137,7 +141,7 @@
       color: white;
       font-size: 16px;
       background-color: #387ef5; }
-      .poll-answer-container .poll-answer-button-left .poll-answer-button:active, .poll-answer-container .poll-answer-button-left .poll-answer-button:hover {
+      .poll-answer-container .poll-answer-button-left .poll-answer-button.active, .poll-answer-container .poll-answer-button-left .poll-answer-button.activated {
         background-color: #0b59d6; }
   .poll-answer-container .poll-answer-button-skip {
     width: 54px;
@@ -148,7 +152,7 @@
       font-size: 14px;
       background-color: #f8f8f8;
       border: 1px solid #d2d2d2; }
-      .poll-answer-container .poll-answer-button-skip .poll-answer-button:active, .poll-answer-container .poll-answer-button-skip .poll-answer-button:hover {
+      .poll-answer-container .poll-answer-button-skip .poll-answer-button.active, .poll-answer-container .poll-answer-button-skip .poll-answer-button.activated {
         background-color: #d2d2d2; }
   .poll-answer-container .poll-answer-button-flag {
     width: 27px;
@@ -159,6 +163,6 @@
       font-size: 18px;
       background-color: #fff;
       border: 1px solid #d9d9d9; }
-      .poll-answer-container .poll-answer-button-flag .poll-answer-button:active, .poll-answer-container .poll-answer-button-flag .poll-answer-button:hover {
+      .poll-answer-container .poll-answer-button-flag .poll-answer-button.active, .poll-answer-container .poll-answer-button-flag .poll-answer-button.activated {
         border-color: #f79f98;
         background-color: #f79f98; }

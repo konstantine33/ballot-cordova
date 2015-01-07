@@ -40,8 +40,8 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
 
             var height = scope.height || 400;
 
-            //Adds the required elements
-            var chart_elem = '<div style="height:' + height + 'px" ng-show="ballot.get(\'answer_count\')" id="' + id + '"></div>';
+            //Adds the required elements, neg left margin is to account for removing vertical axis
+            var chart_elem = '<div style="margin-left: -25px; height:' + height + 'px" ng-show="ballot.get(\'answer_count\')" id="' + id + '"></div>';
             var no_responses = '<div style="height:' + height + 'px" class="vertical-center-parent" ng-hide="ballot.get(\'answer_count\')"><h3 class="text-muted vertical-center text-center">There are no responses to this ballot.</h3></div>'
             elem.append($compile(no_responses)(scope));
             elem.append($compile(chart_elem)(scope));
