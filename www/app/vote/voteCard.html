@@ -7,24 +7,28 @@
     <div class="poll-answer-content">
         <div class="poll-answer-item">
             <div class="poll-answer-button-left">
-                <a class="poll-answer-button" ng-click="action(responseType.LEFT_RESPONSE)"><span class="poll-answer-button-text">{{ballot.getAnswerTitle(responseType.LEFT_RESPONSE)}}</span></a>
+                <a class="poll-answer-button" ng-click="action(responseType.LEFT_RESPONSE)"><span
+                        class="poll-answer-button-text">{{ballot.getAnswerTitle(responseType.LEFT_RESPONSE)}}</span></a>
             </div>
         </div>
         <div class="poll-answer-item">
-            <div class="poll-answer-skip">
-                <div class="poll-answer-button-skip">
-                    <a class="poll-answer-button" ng-click="action(responseType.SKIP)"><span class="poll-answer-button-text">Skip</span></a>
-                </div>
+
+            <div class="poll-answer-button-skip">
+                <a class="poll-answer-button" ng-click="action(responseType.SKIP)"><span
+                        class="poll-answer-button-text">Skip</span></a>
             </div>
-            <div class="poll-answer-flag">
-                <div class="poll-answer-button-flag">
-                    <a class="poll-answer-button" ng-click="action(responseType.FLAG)"><span class="poll-answer-button-text icon ion-ios7-flag"></span></a>
-                </div>
+
+
+            <div class="poll-answer-button-flag">
+                <a class="poll-answer-button" ng-click="action(responseType.FLAG)"><span
+                        class="poll-answer-button-text icon ion-ios7-flag"></span></a>
             </div>
+
         </div>
         <div class="poll-answer-item">
             <div class="poll-answer-button-right">
-                <a class="poll-answer-button" ng-click="action(responseType.RIGHT_RESPONSE)"><span class="poll-answer-button-text">{{ballot.getAnswerTitle(responseType.RIGHT_RESPONSE)}}</i></span></a>
+                <a class="poll-answer-button" ng-click="action(responseType.RIGHT_RESPONSE)"><span
+                        class="poll-answer-button-text">{{ballot.getAnswerTitle(responseType.RIGHT_RESPONSE)}}</i></span></a>
             </div>
         </div>
     </div>

@@ -89,15 +89,12 @@
   width: 100%; }
   .poll-answer-container .poll-answer-content {
     margin: 0 auto;
-    display: table; }
+    display: table;
+    height: inherit; }
   .poll-answer-container .poll-answer-item {
-    height: 100%;
+    height: inherit;
     padding: 0;
-    display: inline-block; }
-  .poll-answer-container .poll-answer-skip {
-    height: 70%; }
-  .poll-answer-container .poll-answer-flag {
-    height: 30%; }
+    float: left; }
   .poll-answer-container .poll-answer-button {
     box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -143,9 +140,9 @@
       .poll-answer-container .poll-answer-button-left .poll-answer-button:active, .poll-answer-container .poll-answer-button-left .poll-answer-button:hover {
         background-color: #0b59d6; }
   .poll-answer-container .poll-answer-button-skip {
-    width: 63px;
-    height: 63px;
-    margin: 0 auto; }
+    width: 54px;
+    height: 54px;
+    margin: 5px auto 10px; }
     .poll-answer-container .poll-answer-button-skip .poll-answer-button {
       color: #444;
       font-size: 14px;

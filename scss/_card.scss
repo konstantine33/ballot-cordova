@@ -10,12 +10,12 @@
 $poll-answer-height: 125px;
 $poll-answer-bottom-margin: 20px;
 
-$poll-answer-skip-size: 70%;
+$poll-answer-skip-size: 60%;
 $poll-answer-flag-size: 30%;
 
 $poll-answer-main-circle: $poll-answer-height - $poll-answer-bottom-margin;
-$poll-answer-skip-circle: ($poll-answer-height - $poll-answer-bottom-margin - 15) * $poll-answer-skip-size/100%;
-$poll-answer-flag-circle: ($poll-answer-height - $poll-answer-bottom-margin - 15) * $poll-answer-flag-size/100%;
+$poll-answer-skip-circle: ($poll-answer-height - $poll-answer-bottom-margin - 15px) * $poll-answer-skip-size/100%;
+$poll-answer-flag-circle: ($poll-answer-height - $poll-answer-bottom-margin - 15px) * $poll-answer-flag-size/100%;
 
 $darken-perc: 15%;
 
@@ -55,19 +55,13 @@ $darken-perc: 15%;
   .poll-answer-content {
     margin: 0 auto;
     display: table;
+    height: inherit;
   }
 
   .poll-answer-item {
-    height: 100%;
+    height: inherit;
     padding: 0;
-    display: inline-block;
-  }
-
-  .poll-answer-skip {
-    height: $poll-answer-skip-size;
-  }
-  .poll-answer-flag {
-    height: $poll-answer-flag-size;
+    float: left;
   }
 
   .poll-answer-button {
@@ -127,7 +121,7 @@ $darken-perc: 15%;
   .poll-answer-button-skip {
     width: $poll-answer-skip-circle;
     height: $poll-answer-skip-circle;
-    margin: 0 auto;
+    margin: 5px auto 10px;
 
     .poll-answer-button {
       color: $dark;
