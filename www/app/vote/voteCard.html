@@ -1,39 +1,32 @@
-<div class="vote-card-question">
-    <h2 class="poll-question">{{ballot.get('question')}}</h2>
-</div>
-<div class="vote-card-action">
-    <div class="row vote-card-button-row">
-        <div class="col vote-card-button-col">
-            <div class="button-positive button vote-card-button button-full"
-                 ng-click="action(responseType.LEFT_RESPONSE)">
-                <p class="vote-card-button-text">{{ballot.getAnswerTitle(responseType.LEFT_RESPONSE)}}</p>
-                <span class="vote-card-button-icon icon ion-ios7-arrow-back"></span>
-            </div>
-        </div>
-        <div class="col vote-card-button-col">
-            <div class="button-balanced button button-full vote-card-button"
-                 ng-click="action(responseType.RIGHT_RESPONSE)">
-                <p class="vote-card-button-text">{{ballot.getAnswerTitle(responseType.RIGHT_RESPONSE)}}</p>
-                <span class="vote-card-button-icon icon ion-ios7-arrow-forward"></span>
-            </div>
-        </div>
+<div class="poll-question-container">
+    <div class="poll-question-content">
+        <h2 class="poll-question">{{ballot.get('question')}}</h2>
     </div>
 </div>
-<div class="vote-card-footer">
-    <div class="content-center-parent">
-        <div class="content-center-child">
-            <div class="row" style="padding:0">
-                <div class="col">
-                    <button class="button button-clear button-small button-stable" ng-click="action(responseType.SKIP)">
-                        Skip
-                    </button>
+<div class="poll-answer-container">
+    <div class="poll-answer-content">
+        <div class="poll-answer-item">
+            <div class="poll-answer-button-left">
+                <a class="poll-answer-button" ng-click="action(responseType.LEFT_RESPONSE)"><span class="poll-answer-button-text">{{ballot.getAnswerTitle(responseType.LEFT_RESPONSE)}}</span></a>
+            </div>
+        </div>
+        <div class="poll-answer-item">
+            <div class="poll-answer-skip">
+                <div class="poll-answer-button-skip">
+                    <a class="poll-answer-button" ng-click="action(responseType.SKIP)"><span class="poll-answer-button-text">Skip</span></a>
                 </div>
-                <div class="col">
-                    <button class="button button-clear button-small button-assertive"
-                            ng-click="action(responseType.FLAG)">Flag
-                    </button>
+            </div>
+            <div class="poll-answer-flag">
+                <div class="poll-answer-button-flag">
+                    <a class="poll-answer-button" ng-click="action(responseType.FLAG)"><span class="poll-answer-button-text icon ion-ios7-flag"></span></a>
                 </div>
             </div>
         </div>
+        <div class="poll-answer-item">
+            <div class="poll-answer-button-right">
+                <a class="poll-answer-button" ng-click="action(responseType.RIGHT_RESPONSE)"><span class="poll-answer-button-text">{{ballot.getAnswerTitle(responseType.RIGHT_RESPONSE)}}</i></span></a>
+            </div>
+        </div>
     </div>
+
 </div>
