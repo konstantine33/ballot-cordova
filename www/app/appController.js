@@ -1,11 +1,14 @@
-BallotApp.controller('appController', function ($state, Authenticate, $ionicLoading, $timeout, $scope) {
-    $scope.loading = true;
-    $ionicLoading.show();
+BallotApp.controller('appController', function ($state, Authenticate, $window, $ionicPlatform) {
 
     function doneLoading (){
-        $ionicLoading.hide();
-        $scope.loading = false;
         $state.go('vote');
+        $ionicPlatform.ready(function(){
+
+            if($window.navigator.splashscreen){
+                $window.navigator.splashscreen.hide();
+            }
+
+        });
     }
 
     Authenticate()
