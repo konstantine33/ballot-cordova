@@ -1,13 +1,13 @@
-BallotApp.controller('appController', function ($state, Authenticate, $window, $ionicPlatform) {
+BallotApp.controller('appController', function ($state, Authenticate, $window, $ionicPlatform, $timeout) {
 
     function doneLoading (){
         $state.go('vote');
         $ionicPlatform.ready(function(){
-
             if($window.navigator.splashscreen){
-                $window.navigator.splashscreen.hide();
+                $timeout(function(){
+                    $window.navigator.splashscreen.hide();
+                }, 1000)
             }
-
         });
     }
 

@@ -18,6 +18,9 @@
   <preference name="ShowSplashScreenSpinner" value="false" />
   
   <platform name="android">
+    <preference name="SplashScreen" value="screen" />
+    <!-- Set super high delay so that it can removed programatically -->
+    <preference name="SplashScreenDelay" value="100000" />
     <icon src="assets/Android/res/drawable-ldpi/icon.png" density="ldpi" />
     <icon src="assets/Android/res/drawable-mdpi/icon.png" density="mdpi" />
     <icon src="assets/Android/res/drawable-hdpi/icon.png" density="hdpi" />

@@ -22,11 +22,17 @@
         }
     },
     "installed_plugins": {
+        "com.shazron.cordova.plugin.keychainutil": {
+            "PACKAGE_NAME": "com.tallyhere"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.tallyhere"
+        },
         "org.apache.cordova.device": {
-            "PACKAGE_NAME": "com.ionicframework.refer194649"
+            "PACKAGE_NAME": "com.tallyhere"
         },
         "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "com.getballot"
+            "PACKAGE_NAME": "com.tallyhere"
         }
     },
     "dependent_plugins": {}
