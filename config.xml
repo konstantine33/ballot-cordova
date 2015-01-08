@@ -15,6 +15,7 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="Orientation" value="portrait" />
   <preference name="AutoHideSplashScreen" value="false" />
+  <preference name="ShowSplashScreenSpinner" value="false" />
   
   <platform name="android">
     <icon src="assets/Android/res/drawable-ldpi/icon.png" density="ldpi" />
