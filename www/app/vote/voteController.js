@@ -1,4 +1,10 @@
-BallotApp.controller('voteController', function ($scope, Ballot, $rootScope) {
+BallotApp.controller('voteController', function ($scope, Ballot, $rootScope, LocalNotifications) {
+
+    LocalNotifications.registerPermission()
+        .then(function(){
+            return LocalNotifications.setNewPollsNotification();
+        });
+
     $scope.newBallotsEvent = "NewBallotsEvent";
     $scope.getBallotsEvent = "GetBallotsEvent";
 
