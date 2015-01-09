@@ -43,6 +43,8 @@ BallotApp.factory('LocalNotifications', function($ionicPlatform, $q, $window){
                 if(!result){
                     return promisify(fnc);
                 }
+
+                return result;
             })
 
     };
@@ -57,16 +59,25 @@ BallotApp.factory('LocalNotifications', function($ionicPlatform, $q, $window){
         return promisify(fnc);
     };
 
+
+    //Makes sure there's permission then sets a new polls notification
     LocalNotifications.prototype.setNewPollsNotification = function(){
-        var date = new Date();
-        date.setDate(date.getDate() + 2);
-        return this.add({
-            id: 'new_polls_notification',
-            date: date,
-            title: "Tally",
-            message: "There are new polls waiting for you to answer!",
-            repeat: "weekly"
-        })
+        var self = this;
+        return this.registerPermission()
+            .then(function(granted){
+                if(granted){
+                    var date = new Date();
+                    date.setDate(date.getDate() + 2);
+                    //date.setMinutes(date.getMinutes() + 1);
+                    return self.add({
+                        id: 'new_polls_notification',
+                        date: date,
+                        title: "Tally",
+                        message: "There are new polls waiting for you to answer!",
+                        repeat: "weekly"
+                    })
+                }
+            })
     };
 
     var localNotifications = new LocalNotifications();

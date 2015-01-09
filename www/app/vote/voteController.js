@@ -1,9 +1,6 @@
 BallotApp.controller('voteController', function ($scope, Ballot, $rootScope, LocalNotifications) {
 
-    LocalNotifications.registerPermission()
-        .then(function(){
-            return LocalNotifications.setNewPollsNotification();
-        });
+    LocalNotifications.setNewPollsNotification();
 
     $scope.newBallotsEvent = "NewBallotsEvent";
     $scope.getBallotsEvent = "GetBallotsEvent";
@@ -15,13 +12,14 @@ BallotApp.controller('voteController', function ($scope, Ballot, $rootScope, Loc
                 $rootScope.$emit($scope.newBallotsEvent, {ballots: ballots});
             });
     }
+
     getBallots();
 
-    var off = $rootScope.$on($scope.getBallotsEvent, function(){
+    var off = $rootScope.$on($scope.getBallotsEvent, function () {
         getBallots()
     });
 
-    $scope.$on("$destroy", function(){
+    $scope.$on("$destroy", function () {
         off();
     });
 
