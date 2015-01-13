@@ -35,11 +35,15 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"LocalNotification\"><param name=\"ios-package\" onload=\"true\" value=\"APPLocalNotification\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -54,12 +58,16 @@
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "com.tallyhere"
         },
-        "org.apache.cordova.device": {
+        "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "com.tallyhere"
         },
-        "org.apache.cordova.splashscreen": {
+        "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "com.tallyhere"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.tallyhere"
+        }
+    }
 }
