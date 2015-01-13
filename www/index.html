@@ -35,8 +35,8 @@
     <script src="app/auth/BallotToken.js"></script>
 
     <script src="app/models/Ballot.js"></script>
+    <script src="app/models/Account.js"></script>
     <script src="app/models/BallotPresenter.js"></script>
-    <script src="app/models/APIQuery.js"></script>
     <script src="app/models/APIQuery.js"></script>
     <script src="app/models/VotingManager.js"></script>
 
@@ -52,6 +52,7 @@
     <script src="app/results/resultsController.js"></script>
     <script src="app/vote/voteController.js"></script>
     <script src="app/vote/votingCards.js"></script>
+    <script src="app/intro/introController.js"></script>
 
     <!-- Vendor -->
     <script src="app/vendor/canvasjs.min.js"></script>
@@ -59,7 +60,11 @@
 </head>
 <body ng-app="starter" ng-controller="appController">
 
-<ion-side-menus>
+<div ng-if="isShowingIntro && hasCheckedIntro">
+    <div ng-include="'app/intro/intro.html'"></div>
+</div>
+
+<ion-side-menus ng-if="!isShowingIntro && hasCheckedIntro">
     <ion-side-menu-content drag-content="false">
         <ion-nav-bar class="bar-light tally-nav-bar">
             <button class="button button-royal button-clear icon ion-navicon" menu-toggle="left"></button>
@@ -79,6 +84,7 @@
                 <a class="item" ui-sref="my_ballots" menu-close>My Polls</a>
                 <a class="item" ui-sref="results" menu-close>Answered Polls</a>
                 <a class="item" ui-sref="groups" menu-close>Manage Groups</a>
+                <a class="item" ng-click="viewIntro()" menu-close>Help</a>
             </ul>
         </ion-content>
     </ion-side-menu>

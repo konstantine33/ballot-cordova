@@ -78,7 +78,7 @@ BallotApp.factory('Ballot', function (SERVER_URL, Request, $q, APIQuery, BallotP
     //STATIC METHODS
     /////////////////////////////////////
 
-    Ballot.url = SERVER_URL + "/ballot";
+    Ballot.url = SERVER_URL + "/ballots";
 
     ///////////QUERY METHODS - Responds with a QUERY object that must be executed manually
 

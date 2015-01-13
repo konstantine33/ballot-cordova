@@ -8,7 +8,6 @@ BallotApp.controller('voteController', function ($scope, Ballot, $rootScope, Loc
     function getBallots() {
         Ballot.recommend(50)
             .then(function (ballots) {
-                $scope.loaded = true;
                 $rootScope.$emit($scope.newBallotsEvent, {ballots: ballots});
             });
     }

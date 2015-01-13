@@ -13,11 +13,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
+                            "xml": "<feature name=\"LocalNotification\"><param name=\"android-package\" value=\"de.appplant.cordova.plugin.localnotification.LocalNotification\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"LocalNotification\"><param name=\"android-package\" value=\"de.appplant.cordova.plugin.localnotification.LocalNotification\" /></feature>",
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -31,11 +31,15 @@
                             "count": 1
                         },
                         {
+                            "xml": "<receiver android:name=\"de.appplant.cordova.plugin.localnotification.DeleteIntentReceiver\" />",
+                            "count": 1
+                        },
+                        {
                             "xml": "<receiver android:name=\"de.appplant.cordova.plugin.localnotification.Restore\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\" /></intent-filter></receiver>",
                             "count": 1
                         },
                         {
-                            "xml": "<activity android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.localnotification.ReceiverActivity\" />",
+                            "xml": "<activity android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.localnotification.ReceiverActivity\" android:theme=\"@android:style/Theme.NoDisplay\" />",
                             "count": 1
                         }
                     ],
@@ -53,18 +57,19 @@
         "com.shazron.cordova.plugin.keychainutil": {
             "PACKAGE_NAME": "com.tallyhere"
         },
-        "org.apache.cordova.console": {
+        "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "com.tallyhere"
         },
-        "org.apache.cordova.device": {
+        "org.apache.cordova.console": {
             "PACKAGE_NAME": "com.tallyhere"
         },
         "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "com.tallyhere"
-        },
-        "de.appplant.cordova.plugin.local-notification": {
-            "PACKAGE_NAME": "com.tallyhere"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.tallyhere"
+        }
+    }
 }

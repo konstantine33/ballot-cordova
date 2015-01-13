@@ -129,9 +129,9 @@
     .poll-answer-container .poll-answer-button-right .poll-answer-button {
       color: white;
       font-size: 16px;
-      background-color: #33cd5f; }
+      background-color: #117B70; }
       .poll-answer-container .poll-answer-button-right .poll-answer-button.active, .poll-answer-container .poll-answer-button-right .poll-answer-button.activated {
-        background-color: #239042; }
+        background-color: #083832; }
   .poll-answer-container .poll-answer-button-left {
     width: 105px;
     height: 105px;
@@ -140,9 +140,9 @@
     .poll-answer-container .poll-answer-button-left .poll-answer-button {
       color: white;
       font-size: 16px;
-      background-color: #387ef5; }
+      background-color: #C6471C; }
       .poll-answer-container .poll-answer-button-left .poll-answer-button.active, .poll-answer-container .poll-answer-button-left .poll-answer-button.activated {
-        background-color: #0b59d6; }
+        background-color: #832f13; }
   .poll-answer-container .poll-answer-button-skip {
     width: 54px;
     height: 54px;
@@ -166,3 +166,35 @@
       .poll-answer-container .poll-answer-button-flag .poll-answer-button.active, .poll-answer-container .poll-answer-button-flag .poll-answer-button.activated {
         border-color: #f79f98;
         background-color: #f79f98; }
+
+.intro-logo-container {
+  position: absolute;
+  top: 0;
+  height: 60%;
+  width: 100%;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d; }
+  .intro-logo-container .logo {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    max-width: 55%; }
+
+.intro-description-container {
+  position: absolute;
+  bottom: 0;
+  height: 40%;
+  width: 100%;
+  text-align: center; }
+
+.intro-description {
+  font-size: 24px;
+  margin-bottom: 15px; }
+  .intro-description .small {
+    padding-top: 20px;
+    font-size: 18px; }

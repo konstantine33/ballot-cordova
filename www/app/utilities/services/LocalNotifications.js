@@ -1,28 +1,27 @@
-BallotApp.factory('LocalNotifications', function($ionicPlatform, $q, $window){
+BallotApp.factory('LocalNotifications', function ($ionicPlatform, $q, $window) {
 
     /**
      * Promisify's a local notification's function. It will check for ready, check for the plugin availability, and then call the function the deferred object.
-     * @param func_to_call
+     * @param func_to_call - will be called with a deferred object
      */
-    var promisify = function(func_to_call){
+    var promisify = function (func_to_call) {
         var deferred = $q.defer();
-        $ionicPlatform.ready(function(){
-            if(!$window.plugin || !$window.plugin.notification){
-                deferred.resolve(false)
+        $ionicPlatform.ready(function () {
+            if ($window.plugin && !$window.plugin.notification && angular.isFunction(func_to_call)) {
+                return func_to_call(deferred)
             }
 
-            if(angular.isFunction(func_to_call)){
-                func_to_call(deferred)
-            }
+            deferred.resolve(false)
         });
 
         return deferred.promise;
     };
 
-    function LocalNotifications(){
+    function LocalNotifications() {
     }
-    LocalNotifications.prototype.hasPermission = function(){
-        var fnc = function(deferred){
+
+    LocalNotifications.prototype.hasPermission = function () {
+        var fnc = function (deferred) {
             $window.plugin.notification.local.hasPermission(function (granted) {
                 deferred.resolve(granted);
             });
@@ -31,16 +30,16 @@ BallotApp.factory('LocalNotifications', function($ionicPlatform, $q, $window){
         return promisify(fnc);
     };
 
-    LocalNotifications.prototype.registerPermission = function(){
-        var fnc = function(deferred){
+    LocalNotifications.prototype.registerPermission = function () {
+        var fnc = function (deferred) {
             $window.plugin.notification.local.registerPermission(function (granted) {
                 deferred.resolve(granted);
             });
         };
 
         return this.hasPermission()
-            .then(function(result){
-                if(!result){
+            .then(function (result) {
+                if (!result) {
                     return promisify(fnc);
                 }
 
@@ -49,8 +48,8 @@ BallotApp.factory('LocalNotifications', function($ionicPlatform, $q, $window){
 
     };
 
-    LocalNotifications.prototype.add = function(data){
-        var fnc = function(deferred){
+    LocalNotifications.prototype.add = function (data) {
+        var fnc = function (deferred) {
             $window.plugin.notification.local.add(data, function (result) {
                 deferred.resolve(result);
             });
@@ -61,11 +60,11 @@ BallotApp.factory('LocalNotifications', function($ionicPlatform, $q, $window){
 
 
     //Makes sure there's permission then sets a new polls notification
-    LocalNotifications.prototype.setNewPollsNotification = function(){
+    LocalNotifications.prototype.setNewPollsNotification = function () {
         var self = this;
         return this.registerPermission()
-            .then(function(granted){
-                if(granted){
+            .then(function (granted) {
+                if (granted) {
                     var date = new Date();
                     date.setDate(date.getDate() + 2);
                     //date.setMinutes(date.getMinutes() + 1);
