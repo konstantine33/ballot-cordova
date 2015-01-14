@@ -52,103 +52,103 @@ $darken-perc: 15%;
   height: $poll-answer-height;
   bottom: 0;
   width: 100%;
+}
 
-  .poll-answer-content {
-    margin: 0 auto;
-    display: table;
-    height: inherit;
-  }
+.poll-answer-content {
+  margin: 0 auto;
+  display: table;
+  height: inherit;
+}
 
-  .poll-answer-item {
-    height: inherit;
-    padding: 0;
-    float: left;
+.poll-answer-item {
+  height: inherit;
+  padding: 0;
+  float: left;
+}
+
+.poll-answer-button {
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+
+  display: block;
+  cursor: pointer;
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  overflow: hidden;
+  @include vertical-center-parent();
+
+  .poll-answer-button-text {
+    padding: 0 5px;
+    display: block;
+    @include vertical-center();
+    text-align: center;
   }
+}
+
+.poll-answer-button-right {
+  width: $poll-answer-main-circle;
+  height: $poll-answer-main-circle;
+  float: left;
+  margin-left: 20px;
+
 
   .poll-answer-button {
-    box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box;
-
-    display: block;
-    cursor: pointer;
-    width: inherit;
-    height: inherit;
-    border-radius: 50%;
-    overflow: hidden;
-    @include vertical-center-parent();
-
-    .poll-answer-button-text {
-      padding: 0 5px;
-      display: block;
-      @include vertical-center();
-      text-align: center;
+    color: white;
+    font-size: 16px;
+    background-color: $poll-answer-right-color;
+    &.active, &.activated {
+      background-color: darken($poll-answer-right-color, $darken-perc);
     }
   }
 
-  .poll-answer-button-right {
-    width: $poll-answer-main-circle;
-    height: $poll-answer-main-circle;
-    float: left;
-    margin-left: 20px;
+}
+.poll-answer-button-left {
+  width: $poll-answer-main-circle;
+  height: $poll-answer-main-circle;
+  float: right;
+  margin-right: 20px;
 
-
-    .poll-answer-button {
-      color: white;
-      font-size: 16px;
-      background-color: $poll-answer-right-color;
-      &.active, &.activated {
-        background-color: darken($poll-answer-right-color, $darken-perc);
-      }
-    }
-
-  }
-  .poll-answer-button-left {
-    width: $poll-answer-main-circle;
-    height: $poll-answer-main-circle;
-    float: right;
-    margin-right: 20px;
-
-    .poll-answer-button {
-      color: white;
-      font-size: 16px;
-      background-color: $poll-answer-left-color;
-      &.active, &.activated {
-        background-color: darken($poll-answer-left-color, $darken-perc);
-      }
+  .poll-answer-button {
+    color: white;
+    font-size: 16px;
+    background-color: $poll-answer-left-color;
+    &.active, &.activated {
+      background-color: darken($poll-answer-left-color, $darken-perc);
     }
   }
+}
 
-  .poll-answer-button-skip {
-    width: $poll-answer-skip-circle;
-    height: $poll-answer-skip-circle;
-    margin: 5px auto 10px;
+.poll-answer-button-skip {
+  width: $poll-answer-skip-circle;
+  height: $poll-answer-skip-circle;
+  margin: 5px auto 10px;
 
-    .poll-answer-button {
-      color: $dark;
-      font-size: 14px;
-      background-color: $stable;
-      border: 1px solid darken($stable, $darken-perc);
-      &.active, &.activated {
-        background-color: darken($stable, $darken-perc);
-      }
+  .poll-answer-button {
+    color: $dark;
+    font-size: 14px;
+    background-color: $stable;
+    border: 1px solid darken($stable, $darken-perc);
+    &.active, &.activated {
+      background-color: darken($stable, $darken-perc);
     }
   }
+}
 
-  .poll-answer-button-flag {
-    width: $poll-answer-flag-circle;
-    height: $poll-answer-flag-circle;
-    margin: 0 auto;
+.poll-answer-button-flag {
+  width: $poll-answer-flag-circle;
+  height: $poll-answer-flag-circle;
+  margin: 0 auto;
 
-    .poll-answer-button {
-      color: $assertive;
-      font-size: 18px;
-      background-color: $light;
-      border: 1px solid darken($light, $darken-perc);
-      &.active, &.activated {
-        border-color: lighten($assertive, 20%);
-        background-color: lighten($assertive, 20%);
-      }
+  .poll-answer-button {
+    color: $assertive;
+    font-size: 18px;
+    background-color: $light;
+    border: 1px solid darken($light, $darken-perc);
+    &.active, &.activated {
+      border-color: lighten($assertive, 20%);
+      background-color: lighten($assertive, 20%);
     }
   }
 }
