@@ -28,6 +28,10 @@ BallotApp.config(function ($httpProvider) {
                     message = error.data;
                 }
 
+                if(error.status === 410 || error.data === "UpgradeClient"){
+                    message = "A new version of the app is available! Please check the app store for an update."
+                }
+
                 //TODO: Build an error handling system at some point. This is just a hack for now
                 if(error.data && error.data.indexOf && !!~error.data.indexOf('characters long')){
                     message = error.data;
