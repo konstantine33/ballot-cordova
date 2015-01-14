@@ -27,3 +27,15 @@ BallotApp.directive('noCarriageReturn', function(){
         }
     }
 })
+
+BallotApp.directive('preventGhostclick', function($timeout){
+    return {
+        link: function(scope, elem, attr){
+            elem.addClass('ghost-click-preventer');
+
+            $timeout(function(){
+                elem.remove()
+            }, 500)
+        }
+    }
+});

@@ -37,7 +37,7 @@
   transform: translateY(-50%);
 }
 
-@mixin vertical-center-parent(){
+@mixin vertical-center-parent() {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
@@ -73,7 +73,7 @@
   height: $safe-height;
 }
 
-.canvasjs-chart-credit{
+.canvasjs-chart-credit {
   display: none !important;
 }
 
@@ -84,4 +84,15 @@
 
 .quarter-width {
   width: 25%;
+}
+
+.ghost-click-preventer {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
 }
