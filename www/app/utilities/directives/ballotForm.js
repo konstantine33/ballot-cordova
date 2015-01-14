@@ -26,16 +26,18 @@ BallotApp.directive('noCarriageReturn', function(){
             })
         }
     }
-})
+});
 
-BallotApp.directive('preventGhostclick', function($timeout){
+
+//Goes on an element that wraps the element you are trying to prevent the ghost click
+BallotApp.directive('preventGhostClick', function($timeout){
+    var class_name = 'prevent-ghost-click';
     return {
-        link: function(scope, elem, attr){
-            elem.addClass('ghost-click-preventer');
-
+        link: function(scope, elem, attrs){
+            elem.addClass(class_name);
             $timeout(function(){
-                elem.remove()
+                elem.removeClass(class_name)
             }, 500)
         }
     }
-});
+})

@@ -56,15 +56,8 @@
 .quarter-width {
   width: 25%; }
 
-.ghost-click-preventer {
-  background-color: transparent;
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 3; }
+.prevent-ghost-click {
+  pointer-events: none; }
 
 .card-stack {
   position: absolute;

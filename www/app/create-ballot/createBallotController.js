@@ -24,7 +24,6 @@ BallotApp.controller('createBallotController', function ($scope, Ballot, $window
         return true;
     };
 
-
     $scope.done = function (e) {
         e.preventDefault();
         e.stopPropagation();
