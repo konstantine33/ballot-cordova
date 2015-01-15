@@ -8,9 +8,9 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
     //Handles updating and keep track of data points for the chart object.
     function ChartDataPoints() {
         this.data = [{
-            color: "#387ef5"
+            color: "#C6471C"
         }, {
-            color: "#33cd5f"
+            color: "#117B70"
         }]
     }
 
