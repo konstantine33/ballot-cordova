@@ -37,7 +37,7 @@ BallotApp.directive('preventGhostClick', function($timeout){
             elem.addClass(class_name);
             $timeout(function(){
                 elem.removeClass(class_name)
-            }, 500)
+            }, 350)
         }
     }
 })

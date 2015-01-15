@@ -1,4 +1,4 @@
-<div ng-controller="introController" style="padding: 20px;">
+<div ng-controller="introController">
     <div ng-if="!show_help">
         <ion-content scroll="false">
             <div class="full-page">
@@ -23,49 +23,53 @@
     </div>
     <div ng-if="show_help">
         <ion-content>
-            <h1 class="text-center" style="padding: 30px 0;">Voting is Easy</h1>
-            <div class="center-table" style="margin-top: 50px">
-                <div class="poll-answer-item">
-                    <div class="poll-answer-button-left">
-                        <a class="poll-answer-button"><span
-                                class="poll-answer-button-text">No</span></a>
+            <div style="padding: 30px 20px">
+                <h1 class="text-center">How to Vote</h1>
+
+                <div class="center-table" style="margin-top: 50px">
+                    <div class="poll-answer-item">
+                        <div class="poll-answer-button-left">
+                            <a class="poll-answer-button"><span
+                                    class="poll-answer-button-text">No</span></a>
+                        </div>
+                    </div>
+
+                    <div class="poll-answer-item">
+                        <div class="poll-answer-button-right">
+                            <a class="poll-answer-button"><span
+                                    class="poll-answer-button-text">Yes</span></a>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="text-center">Swipe left/right or tap to vote</h2>
+
+                <div class="center-table" style="margin-top: 50px">
+                    <div class="poll-answer-item">
+                        <div class="poll-answer-button-skip">
+                            <a class="poll-answer-button"><span
+                                    class="poll-answer-button-text">Skip</span></a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="poll-answer-item">
-                    <div class="poll-answer-button-right">
-                        <a class="poll-answer-button"><span
-                                class="poll-answer-button-text">Yes</span></a>
+                <h4 class="text-center">Skip a question but you'll never see it again</h4>
+
+                <div class="center-table" style="margin-top: 50px">
+                    <div class="poll-answer-item">
+                        <div class="poll-answer-button-flag">
+                            <a class="poll-answer-button"><span
+                                    class="poll-answer-button-text icon ion-ios7-flag"></span></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h3 class="text-center">Swipe or tap to vote</h3>
+                <h4 class="text-center">Flag to report inappropriate content</h4>
 
-            <div class="center-table" style="margin-top: 50px">
-                <div class="poll-answer-item">
-                    <div class="poll-answer-button-skip">
-                        <a class="poll-answer-button"><span
-                                class="poll-answer-button-text">Skip</span></a>
-                    </div>
+                <div class="padding" style="margin-top: 50px;">
+                    <button class="button button-block button-large button-royal" ng-click="finishIntro()">Start
+                        Voting
+                    </button>
                 </div>
             </div>
-
-            <h4 class="text-center">Skip a question but you'll never see it again</h4>
-
-            <div class="center-table" style="margin-top: 50px">
-                <div class="poll-answer-item">
-                    <div class="poll-answer-button-flag">
-                        <a class="poll-answer-button"><span
-                                class="poll-answer-button-text icon ion-ios7-flag"></span></a>
-                    </div>
-                </div>
-            </div>
-            <h4 class="text-center">Flag to report inappropriate content</h4>
-
-            <div class="padding" style="margin-top: 50px;">
-                <button class="button button-block button-large button-royal" ng-click="finishIntro()">Start Voting</button>
-            </div>
-
         </ion-content>
     </div>
 </div>
