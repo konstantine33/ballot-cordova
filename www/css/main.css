@@ -217,3 +217,53 @@
   .intro-description .small {
     padding-top: 20px;
     font-size: 18px; }
+
+.help-title {
+  position: absolute;
+  top: 0;
+  height: 10%;
+  left: 20px;
+  right: 20px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d; }
+
+.help-answer-main {
+  position: absolute;
+  top: 10%;
+  height: 32.5%;
+  left: 20px;
+  right: 20px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d; }
+
+.help-answer-skip {
+  position: absolute;
+  top: 42.5%;
+  height: 25%;
+  left: 20px;
+  right: 20px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d; }
+
+.help-answer-flag {
+  position: absolute;
+  top: 67.5%;
+  height: 15%;
+  left: 20px;
+  right: 20px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d; }
+
+.help-footer {
+  position: absolute;
+  bottom: 0;
+  height: 17.5%;
+  left: 20px;
+  right: 20px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d; }

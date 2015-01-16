@@ -66,12 +66,14 @@ BallotApp.factory('LocalNotifications', function ($ionicPlatform, $q, $window) {
             .then(function (granted) {
                 if (granted) {
                     var date = new Date();
-                    date.setDate(date.getDate() + 2);
+                    date.setDate(date.getDate() + 3);
                     //date.setMinutes(date.getMinutes() + 1);
                     return self.add({
                         id: 'new_polls_notification',
                         date: date,
-                        title: "Tally",
+
+                        //Only show title on Android device.
+                        title: $window.device && $window.device.platform === "Android" ? "Tally" : undefined,
                         message: "There are new polls waiting for you to answer!",
                         repeat: "weekly"
                     })

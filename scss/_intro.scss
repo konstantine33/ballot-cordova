@@ -37,3 +37,55 @@ $bottom-margin: 30px;
     font-size: 18px;
   }
 }
+
+
+$help-title-height: 10%;
+$help-answer-main-height: 32.5%;
+$help-answer-skip-height: 25%;
+$help-answer-flag-height: 15%;
+$help-answer-footer-height: 100%-$help-title-height - $help-answer-main-height - $help-answer-skip-height - $help-answer-flag-height;
+
+@mixin help-width() {
+  left: 20px;
+  right: 20px;
+}
+
+.help-title {
+  position: absolute;
+  top: 0;
+  height: $help-title-height;
+  @include help-width();
+  @include vertical-center-parent()
+}
+
+.help-answer-main {
+  position: absolute;
+  top: $help-title-height;
+  height: $help-answer-main-height;
+  @include help-width();
+  @include vertical-center-parent()
+}
+
+.help-answer-skip {
+  position: absolute;
+  top: $help-title-height + $help-answer-main-height;
+  height: $help-answer-skip-height;
+  @include help-width();
+  @include vertical-center-parent()
+}
+
+.help-answer-flag {
+  position: absolute;
+  top: $help-title-height + $help-answer-main-height + $help-answer-skip-height;
+  height: $help-answer-flag-height;
+  @include help-width();
+  @include vertical-center-parent()
+}
+
+.help-footer {
+  position: absolute;
+  bottom: 0;
+  height: $help-answer-footer-height;
+  @include help-width();
+  @include vertical-center-parent()
+}
