@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.tallyhere" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.tallyhere.tally" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Tally</name>
   <description>
         Ballot App
     </description>
-  <author email="support@tallyhere.com" href="http://tallyhere.com/">
-      Tally Support
+  <author email="support@tallyhere.com" href="http://www.tallyhere.com/">
+      Tally is an anonymous social voting platform. Create or join a group of friends and ask questions to that group anonymously.
+    We believe that anonymity allows people to ask and answer truthfully. Tally allows you to get meaningful answers to controversial questions from
+    your peers!
     </author>
   <content src="index.html"/>
   <access origin="*"/>
