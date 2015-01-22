@@ -12,14 +12,6 @@ BallotApp.factory('Ballot', function (SERVER_URL, Request, $q, APIQuery, BallotP
         return this.data._id
     };
 
-    //Ballot.prototype.close = function () {
-    //    this.data.closed = true;
-    //    this.data.closed_on = new Date();
-    //    return Request.post(this.url + "/close").then(function (response) {
-    //        return response.data
-    //    })
-    //};
-
     Ballot.prototype.destroy = function () {
         if (this.get('closed')) {
             return $q.reject('You cannot delete a closed ballot.')

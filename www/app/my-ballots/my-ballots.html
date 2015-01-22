@@ -15,7 +15,10 @@
         <ion-list>
             <a class="item item-button-right" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId()})">
                 {{ballot.get('question')}}
-                <p class="text-small text-muted">Created <span am-time-ago="ballot.get('created_at')"></span></p>
+                <p class="text-small">
+                    <span ng-if="!ballot.get('closed')" class="text-muted">Created <span am-time-ago="ballot.get('created_at')"></span></span>
+                    <span ng-if="ballot.get('closed')" class="assertive">Closed by community as inappropriate</span>
+                </p>
             </a>
             <ion-infinite-scroll on-infinite="getMore()" distance="10%" ng-if="hasMore"></ion-infinite-scroll>
         </ion-list>

@@ -13,10 +13,4 @@ BallotApp.controller('myBallotsController', function($scope, Ballot){
                 $scope.$broadcast('scroll.infiniteScrollComplete')
             });
     };
-
-    $scope.confirmClose = function($event, ballot){
-        $event.stopPropagation();
-        $event.preventDefault();
-        ballot.confirmClose()
-    }
 });
