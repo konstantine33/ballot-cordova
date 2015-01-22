@@ -80,7 +80,6 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
                             interactivityEnabled: false,
                             axisY: {
                                 minimum: 0,
-                                interval: 10,
                                 gridThickness: 0,
                                 tickThickness: 0,
                                 lineThickness: 0,
