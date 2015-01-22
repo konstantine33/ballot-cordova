@@ -55,7 +55,12 @@ $help-answer-footer-height: 100%-$help-title-height - $help-answer-main-height -
   top: 0;
   height: $help-title-height;
   @include help-width();
-  @include vertical-center-parent()
+  @include vertical-center-parent();
+
+  h2 {
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
 }
 
 .help-answer-main {
