@@ -2,6 +2,7 @@ BallotApp.controller('resultsController', function($scope, Ballot){
     $scope.ballots = [];
     $scope.loaded = false;
     $scope.hasMore = true;
+    $scope.ballot = null;
     var query = Ballot.queryResponded();
 
     $scope.getMore = function(){
@@ -13,4 +14,13 @@ BallotApp.controller('resultsController', function($scope, Ballot){
                 $scope.$broadcast('scroll.infiniteScrollComplete')
             });
     };
+
+    $scope.selectBallot = function(ballot){
+        $scope.ballot = ballot;
+    };
+
+    $scope.deselectBallot = function(){
+        $scope.ballot = null;
+    }
+
 });
