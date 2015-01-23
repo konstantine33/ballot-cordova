@@ -37,6 +37,8 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
                     var new_id = makeid(25);
                     keychain.setForKey(function () {
                         authenticator = new_id;
+
+                        //Sets to tally keychain so we can later remove ballot keychain
                         keychain.setForKey(angular.noop, angular.noop, TALLY_KEYCHAIN, TALLY_SERVICE_NAME, new_id)
                         return deferred.resolve();
                     }, function (e) {
@@ -49,8 +51,7 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
                 keychain.getForKey(function (value) {
                     if (value) {
                         authenticator = value;
-                        alert("Ballot Value: " + value)
-                        //Transfers to a new key so we can later get rid of old one
+                        //Transfers to tally keychain so we can later get rid of ballot keychain
                         keychain.setForKey(angular.noop, angular.noop, TALLY_KEYCHAIN, TALLY_SERVICE_NAME, value);
                         return deferred.resolve();
                     } else {
@@ -60,10 +61,6 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
                 }, function () {
                     setValue()
                 }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME)
-
-                keychain.getForKey(function(value){
-                    alert("Tally value: " + value)
-                }, angular.noop, TALLY_KEYCHAIN, TALLY_SERVICE_NAME)
 
             } else {
                 //For development
