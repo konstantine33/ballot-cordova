@@ -37,10 +37,12 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
                     var new_id = makeid(25);
                     keychain.setForKey(function () {
                         authenticator = new_id;
+                        keychain.setForKey(angular.noop, angular.noop, TALLY_KEYCHAIN, TALLY_SERVICE_NAME, new_id)
                         return deferred.resolve();
                     }, function (e) {
                         return deferred.reject('Unable to set keychain value')
-                    }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME, new_id)
+                    }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME, new_id);
+
                 }
 
 
