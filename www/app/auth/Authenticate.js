@@ -40,28 +40,34 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
                         return deferred.resolve();
                     }, function (e) {
                         return deferred.reject('Unable to set keychain value')
-                    }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME, new_id)
+                    }, TALLY_KEYCHAIN, TALLY_SERVICE_NAME, new_id)
                 }
 
 
                 keychain.getForKey(function (value) {
                     if (value) {
                         authenticator = value;
-                        alert("Ballot Value: " + value)
-                        //Transfers to a new key so we can later get rid of old one
-                        keychain.setForKey(angular.noop, angular.noop, TALLY_KEYCHAIN, TALLY_SERVICE_NAME, value);
                         return deferred.resolve();
                     } else {
-                        setValue()
+
+                        //Checks if an authenticator is located under old keychain value and sets it to new keychain
+                        keychain.getForKey(function (value) {
+                            if (value) {
+                                authenticator = value;
+                                keychain.setForKey(angular.noop, angular.noop, TALLY_KEYCHAIN, TALLY_SERVICE_NAME, value);
+                                return deferred.resolve();
+                            } else {
+                                setValue()
+                            }
+                        }, function () {
+                            setValue()
+                        }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME)
+
                     }
 
                 }, function () {
                     setValue()
                 }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME)
-
-                keychain.getForKey(function(value){
-                    alert("Tally value: " + value)
-                }, angular.noop, TALLY_KEYCHAIN, TALLY_SERVICE_NAME)
 
             } else {
                 //For development
@@ -85,10 +91,10 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
 
     //Authenticates if necessary
     function authenticate() {
-        if(!BallotToken.get()){
+        if (!BallotToken.get()) {
             return login();
-        }else {
-            return $http.post(SERVER_URL + '/check-auth').catch(function(){
+        } else {
+            return $http.post(SERVER_URL + '/check-auth').catch(function () {
                 return login();
             })
         }
