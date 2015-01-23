@@ -1,4 +1,4 @@
-BallotApp.controller('resultsController', function($scope, Ballot){
+BallotApp.controller('resultsController', function($scope, Ballot, BackButtonHack){
     $scope.ballots = [];
     $scope.loaded = false;
     $scope.hasMore = true;
@@ -17,10 +17,14 @@ BallotApp.controller('resultsController', function($scope, Ballot){
 
     $scope.selectBallot = function(ballot){
         $scope.ballot = ballot;
+        BackButtonHack.showBack();
     };
 
     $scope.deselectBallot = function(){
         $scope.ballot = null;
-    }
+        BackButtonHack.hideBack();
+    };
 
+    BackButtonHack.registerBackFunction($scope.deselectBallot);
+    BackButtonHack.resetOnScopeDestroy($scope);
 });
