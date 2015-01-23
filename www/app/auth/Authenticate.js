@@ -2,6 +2,9 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
     var BALLOT_KEYCHAIN = "ballot_account_id";
     var BALLOT_SERVICE_NAME = "com.getballot";
 
+    var TALLY_KEYCHAIN = "tally_account_id";
+    var TALLY_SERVICE_NAME = "com.tallyhere.tally";
+
     function makeid(count) {
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -37,7 +40,7 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
                         return deferred.resolve();
                     }, function (e) {
                         return deferred.reject('Unable to set keychain value')
-                    }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME, new_id)
+                    }, TALLY_KEYCHAIN, TALLY_SERVICE_NAME, new_id)
                 }
 
 
@@ -46,12 +49,25 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
                         authenticator = value;
                         return deferred.resolve();
                     } else {
-                        setValue()
+
+                        //Checks if an authenticator is located under old keychain value and sets it to new keychain
+                        keychain.getForKey(function (value) {
+                            if (value) {
+                                authenticator = value;
+                                keychain.setForKey(angular.noop, angular.noop, TALLY_KEYCHAIN, TALLY_SERVICE_NAME, value);
+                                return deferred.resolve();
+                            } else {
+                                setValue()
+                            }
+                        }, function () {
+                            setValue()
+                        }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME)
+
                     }
 
                 }, function () {
                     setValue()
-                }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME)
+                }, TALLY_KEYCHAIN, TALLY_SERVICE_NAME)
 
             } else {
                 //For development
@@ -75,10 +91,10 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
 
     //Authenticates if necessary
     function authenticate() {
-        if(!BallotToken.get()){
+        if (!BallotToken.get()) {
             return login();
-        }else {
-            return $http.post(SERVER_URL + '/check-auth').catch(function(){
+        } else {
+            return $http.post(SERVER_URL + '/check-auth').catch(function () {
                 return login();
             })
         }
