@@ -1,5 +1,5 @@
 <ion-view>
-    <ion-content>
+    <ion-content ng-show="!ballot">
         <ion-nav-buttons side="right">
             <button class="button button-royal button-clear icon ion-plus-circled" ui-sref="create_ballot">
             </button>
@@ -13,11 +13,20 @@
             </div>
         </div>
         <ion-list>
-            <a class="item item-button-right" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId()})">
+            <a class="item item-button-right" ng-repeat="ballot in ballots" ng-click="selectBallot(ballot)">
                 {{ballot.get('question')}}
-                <p class="text-small text-muted">Created <span am-time-ago="ballot.get('created_at')"></span></p>
+                <p class="text-small">
+                    <span ng-if="!ballot.get('closed')" class="text-muted">Created <span am-time-ago="ballot.get('created_at')"></span></span>
+                    <span ng-if="ballot.get('closed')" class="assertive">Closed by community as inappropriate</span>
+                </p>
             </a>
             <ion-infinite-scroll on-infinite="getMore()" distance="10%" ng-if="hasMore"></ion-infinite-scroll>
         </ion-list>
+    </ion-content>
+    
+    <ion-content scroll="false" ng-if="ballot" class="has-header">
+        <div class="content-full padding">
+            <ballot-chart ballot="ballot"></ballot-chart>
+        </div>
     </ion-content>
 </ion-view>

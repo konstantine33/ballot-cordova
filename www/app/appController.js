@@ -1,5 +1,6 @@
-BallotApp.controller('appController', function ($state, Authenticate, $window, $ionicPlatform, $timeout, Account, $scope, $rootScope) {
+BallotApp.controller('appController', function ($state, Authenticate, $window, $ionicPlatform, $timeout, Account, $scope, $rootScope, BackButtonHack) {
 
+    $scope.backButtonControls = BackButtonHack.controls;
     $scope.hasCheckedIntro = false;
     $scope.isShowingIntro = false;
 

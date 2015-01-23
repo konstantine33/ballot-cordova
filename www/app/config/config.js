@@ -24,17 +24,12 @@ BallotApp.config(function ($httpProvider) {
                     message = "Internet connection was lost. Please connect to the internet then restart Ballot."
                 }
 
-                if(error.status === 503){
+                if(error.status === 503 || error.status === 403){
                     message = error.data;
                 }
 
                 if(error.status === 410 || error.data === "UpgradeClient"){
                     message = "A new version of the app is available! Please check the app store for an update."
-                }
-
-                //TODO: Build an error handling system at some point. This is just a hack for now
-                if(error.data && error.data.indexOf && !!~error.data.indexOf('characters long')){
-                    message = error.data;
                 }
 
                 //If error is due to lack of authorization, then don't alert, but pass

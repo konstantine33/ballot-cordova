@@ -1,7 +1,8 @@
-BallotApp.controller('resultsController', function($scope, Ballot){
+BallotApp.controller('resultsController', function($scope, Ballot, BackButtonHack){
     $scope.ballots = [];
     $scope.loaded = false;
     $scope.hasMore = true;
+    $scope.ballot = null;
     var query = Ballot.queryResponded();
 
     $scope.getMore = function(){
@@ -13,4 +14,17 @@ BallotApp.controller('resultsController', function($scope, Ballot){
                 $scope.$broadcast('scroll.infiniteScrollComplete')
             });
     };
+
+    $scope.selectBallot = function(ballot){
+        $scope.ballot = ballot;
+        BackButtonHack.showBack();
+    };
+
+    $scope.deselectBallot = function(){
+        $scope.ballot = null;
+        BackButtonHack.hideBack();
+    };
+
+    BackButtonHack.registerBackFunction($scope.deselectBallot);
+    BackButtonHack.resetOnScopeDestroy($scope);
 });

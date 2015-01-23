@@ -184,6 +184,24 @@
       border-color: #f79f98;
       background-color: #f79f98; }
 
+.results-card-button {
+  position: absolute;
+  bottom: 0;
+  height: 75px;
+  left: 10px;
+  right: 10px; }
+  .results-card-button .button {
+    height: 50px;
+    margin-top: 0px;
+    margin-bottom: 25px; }
+
+.results-card-content {
+  position: absolute;
+  top: 0;
+  bottom: 75px;
+  left: 10px;
+  right: 10px; }
+
 .intro-logo-container {
   position: absolute;
   top: 0;
@@ -227,6 +245,9 @@
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d; }
+  .help-title h2 {
+    margin-top: 15px;
+    margin-bottom: 0; }
 
 .help-answer-main {
   position: absolute;

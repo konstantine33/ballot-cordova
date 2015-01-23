@@ -1,5 +1,5 @@
 <ion-view>
-    <ion-content class="has-header">
+    <ion-content class="has-header" ng-show="!ballot">
         <ion-nav-buttons side="right">
             <button class="button button-royal button-clear icon ion-plus-circled" ui-sref="create_ballot">
             </button>
@@ -8,18 +8,25 @@
             <div class="vertical-center-parent safe-height">
                 <div class="vertical-center text-center">
                     <h3 class="text-muted">You haven't voted on any polls yet.</h3>
-                    <button class="button button-royal button-block" ui-sref="vote" style="margin-top: 50px">Vote on a Poll
+                    <button class="button button-royal button-block" ui-sref="vote" style="margin-top: 50px">Vote on a
+                        Poll
                     </button>
                 </div>
             </div>
         </div>
 
         <ion-list>
-            <a class="item" ng-repeat="ballot in ballots" ui-sref="ballot({ballot_id: ballot.getId()})">
+            <a class="item" ng-repeat="ballot in ballots" ng-click="selectBallot(ballot)">
                 {{ballot.get('question')}}
                 <p class="text-muted">Votes: {{ballot.get('answer_count')}}</p>
             </a>
         </ion-list>
         <ion-infinite-scroll on-infinite="getMore()" distance="10%" ng-if="hasMore"></ion-infinite-scroll>
+    </ion-content>
+
+    <ion-content scroll="false" ng-if="ballot" class="has-header">
+        <div class="content-full padding">
+            <ballot-chart ballot="ballot"></ballot-chart>
+        </div>
     </ion-content>
 </ion-view>

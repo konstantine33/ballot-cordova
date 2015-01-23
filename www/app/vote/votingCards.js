@@ -1,7 +1,26 @@
-BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCache, Ballot, $window, VotingManager) {
+BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $window, VotingManager, $interval) {
     var voting_card_template = '<li voting-card class="vote-card"></li>';
     var results_card_template = '<li results-card class="vote-card"></li>';
 
+    function RecurringEmitter() {
+        this.off = null;
+        this.emitting = false;
+    }
+
+    RecurringEmitter.prototype.emit = function(eventName){
+        if(!this.emitting){
+            this.emitting = true;
+            this.off = $interval(function(){
+                $rootScope.$emit(eventName)
+            }, 5000)
+        }
+    };
+
+    RecurringEmitter.prototype.stop = function(){
+        $interval.cancel(this.off);
+        this.off = null;
+        this.emitting = false;
+    };
 
     return {
         scope: {
@@ -16,6 +35,7 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
             scope.ballots = [];
             scope.current_card = null;
             scope.responseType = Ballot.responseType;
+            var recurring_emitter = new RecurringEmitter();
             var list_parent = elem.find('ul');
             var stack = $window.gajus.Swing.Stack({
                 isThrowOut: function (offset, element, confidence) {
@@ -42,15 +62,28 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, $templateCach
                     }
                 });
 
-                //Runs only first time
-                if (!scope.loaded) {
-                    scope.loaded = true;
+                scope.loaded = true;
+
+                //sets a new card if there isnt a current card and there are available cards to set
+                if(!scope.current_card && scope.ballots.length){
                     setNewVotingCard()
                 }
+
+                //if there isn't a current card and there are no new cards, then start trying to retrieve cards
+                else if (!scope.current_card && !scope.ballots.length){
+                    recurring_emitter.emit(scope.getBallotsEvent);
+                }
+
+                //Make sure the event emitter has stopped
+                else {
+                    recurring_emitter.stop();
+                }
+
             });
 
             scope.$on('$destroy', function () {
                 VotingManager.removeAllPending();
+                recurring_emitter.stop();
                 off();
             });
 

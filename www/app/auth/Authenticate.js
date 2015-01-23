@@ -2,6 +2,9 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
     var BALLOT_KEYCHAIN = "ballot_account_id";
     var BALLOT_SERVICE_NAME = "com.getballot";
 
+    var TALLY_KEYCHAIN = "tally_account_id";
+    var TALLY_SERVICE_NAME = "com.tallyhere.tally";
+
     function makeid(count) {
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -34,16 +37,22 @@ BallotApp.factory('Authenticate', function ($q, $http, $window, SERVER_URL, Ball
                     var new_id = makeid(25);
                     keychain.setForKey(function () {
                         authenticator = new_id;
+
+                        //Sets to tally keychain so we can later remove ballot keychain
+                        keychain.setForKey(angular.noop, angular.noop, TALLY_KEYCHAIN, TALLY_SERVICE_NAME, new_id)
                         return deferred.resolve();
                     }, function (e) {
                         return deferred.reject('Unable to set keychain value')
-                    }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME, new_id)
+                    }, BALLOT_KEYCHAIN, BALLOT_SERVICE_NAME, new_id);
+
                 }
 
 
                 keychain.getForKey(function (value) {
                     if (value) {
                         authenticator = value;
+                        //Transfers to tally keychain so we can later get rid of ballot keychain
+                        keychain.setForKey(angular.noop, angular.noop, TALLY_KEYCHAIN, TALLY_SERVICE_NAME, value);
                         return deferred.resolve();
                     } else {
                         setValue()

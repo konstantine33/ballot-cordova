@@ -20,16 +20,6 @@ BallotApp    .config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'app/results/results.html',
             controller: "resultsController"
         })
-        .state('ballot', {
-            url: "/ballot/:ballot_id",
-            templateUrl: "app/ballot-view/ballot-view.html",
-            controller: "ballotViewController",
-            resolve: {
-                ballot: function(Ballot, $stateParams){
-                    return Ballot.findById($stateParams.ballot_id)
-                }
-            }
-        })
         .state('groups', {
             url: "/groups",
             templateUrl: "app/groups/groups.html"

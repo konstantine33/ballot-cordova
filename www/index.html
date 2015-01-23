@@ -44,9 +44,9 @@
     <script src="app/utilities/directives/ballotChart.js"></script>
     <script src="app/utilities/services/Request.js"></script>
     <script src="app/utilities/services/LocalNotifications.js"></script>
+    <script src="app/utilities/services/BackButtonHack.js"></script>
 
     <!-- Page Controllers -->
-    <script src="app/ballot-view/ballotViewController.js"></script>
     <script src="app/create-ballot/createBallotController.js"></script>
     <script src="app/my-ballots/myBallotsController.js"></script>
     <script src="app/results/resultsController.js"></script>
@@ -67,7 +67,16 @@
 <ion-side-menus ng-if="!isShowingIntro && hasCheckedIntro">
     <ion-side-menu-content drag-content="false">
         <ion-nav-bar class="bar-light tally-nav-bar">
-            <button class="button button-royal button-clear icon ion-navicon" menu-toggle="left"></button>
+            <span ng-hide="backButtonControls.showBack">
+                <button class="button button-royal button-clear icon ion-navicon" menu-toggle="left"></button>
+            </span>
+
+            <span ng-show="backButtonControls.showBack">
+                <button class="button button-clear button-royal icon icon-left ion-ios7-arrow-left" ng-click="backButtonControls.backFunction()"
+                        > <span style="margin-left: 5px">Back</span>
+                </button>
+            </span>
+
             <h1 class="title"><img class="title-image tally-logo" src="images/title.png"></h1>
         </ion-nav-bar>
         <ion-nav-view animation="no-animation"></ion-nav-view>
