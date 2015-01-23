@@ -187,18 +187,18 @@
 .results-card-button {
   position: absolute;
   bottom: 0;
-  height: 65px;
+  height: 75px;
   left: 10px;
   right: 10px; }
-  .results-card-button button {
+  .results-card-button .button {
     height: 50px;
     margin-top: 0px;
-    margin-bottom: 15px; }
+    margin-bottom: 25px; }
 
 .results-card-content {
   position: absolute;
   top: 0;
-  bottom: 65px;
+  bottom: 75px;
   left: 10px;
   right: 10px; }
 

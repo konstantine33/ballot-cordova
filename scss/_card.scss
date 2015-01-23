@@ -155,7 +155,7 @@ $darken-perc: 15%;
 
 $results-card-button-height: 50px;
 $results-card-button-vertical-margin-top: 0px;
-$results-card-button-vertical-margin-bottom: 15px;
+$results-card-button-vertical-margin-bottom: 25px;
 $results-card-button-height-total: $results-card-button-height + $results-card-button-vertical-margin-top + $results-card-button-vertical-margin-bottom;
 
 .results-card-button {
@@ -165,7 +165,7 @@ $results-card-button-height-total: $results-card-button-height + $results-card-b
   left: 10px;
   right: 10px;
 
-  button {
+  .button {
     height: $results-card-button-height;
     margin-top: $results-card-button-vertical-margin-top;
     margin-bottom: $results-card-button-vertical-margin-bottom;
