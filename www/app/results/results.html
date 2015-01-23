@@ -8,7 +8,8 @@
             <div class="vertical-center-parent safe-height">
                 <div class="vertical-center text-center">
                     <h3 class="text-muted">You haven't voted on any polls yet.</h3>
-                    <button class="button button-royal button-block" ui-sref="vote" style="margin-top: 50px">Vote on a Poll
+                    <button class="button button-royal button-block" ui-sref="vote" style="margin-top: 50px">Vote on a
+                        Poll
                     </button>
                 </div>
             </div>
@@ -25,10 +26,7 @@
 
     <ion-content scroll="false" ng-if="ballot" class="has-header">
         <div class="content-full padding">
-            <div class="text-center padding-top">
-                <h3>{{ballot.get('question')}}</h3>
-            </div>
-            <ballot-chart ballot="ballot" height="350"></ballot-chart>
+            <ballot-chart ballot="ballot"></ballot-chart>
         </div>
     </ion-content>
 </ion-view>

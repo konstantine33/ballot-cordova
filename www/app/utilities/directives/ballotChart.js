@@ -38,11 +38,12 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
             var id = "ballotChart" + incrementer;
             incrementer++;
 
-            var height = scope.height || 400;
+            //You can input the height or it takes the parent element's height less 20px;
+            var height = parseInt(scope.height, 10) || elem.parent()[0].offsetHeight - 20;
 
             //Adds the required elements, neg left margin is to account for removing vertical axis
-            var chart_elem = '<div style="margin-left: -25px; height:' + height + 'px" ng-show="ballot.get(\'answer_count\')" id="' + id + '"></div>';
-            var no_responses = '<div style="height:' + height + 'px" class="vertical-center-parent" ng-hide="ballot.get(\'answer_count\')"><h3 class="text-muted vertical-center text-center">There are no responses to this ballot.</h3></div>'
+            var chart_elem = '<div ng-show="ballot.get(\'answer_count\')" id="' + id + '" style="padding-top: 5px; height:' + height + 'px;"></div>';
+            var no_responses = '<div ng-hide="ballot.get(\'answer_count\')"><h4 class="text-center padding-top">{{ballot.get("question")}}</h4><div style="height:' + (height - 150) +'px" class="vertical-center-parent"><h3 class="text-muted vertical-center text-center">There are no responses to this ballot.</h3></div></div>';
             elem.append($compile(no_responses)(scope));
             elem.append($compile(chart_elem)(scope));
 
@@ -77,13 +78,26 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
 
                     chart = new $window.CanvasJS.Chart(id,
                         {
+                            title: {
+                                text: scope.ballot.get('question'),
+                                fontSize: 18,
+                                fontFamily: "Helvetica",
+                                margin: 15,
+                                fontWeight: "normal"
+                            },
                             interactivityEnabled: false,
                             axisY: {
                                 minimum: 0,
                                 gridThickness: 0,
                                 tickThickness: 0,
                                 lineThickness: 0,
-                                labelFontColor: "transparent"
+                                labelFontColor: "transparent",
+                                margin: 2,
+                                labelMaxWidth: 0,
+                                labelFontSize: 1,
+                                tickLength: 1
+
+
 
                             },
                             axisX: {

@@ -1,9 +1,7 @@
-<div class="padding-vertical">
-    <h4 class="text-center">{{ballot.get('question')}}</h4>
+<div class="results-card-content">
+    <ballot-chart ballot="ballot"></ballot-chart>
 </div>
-<ballot-chart ballot="ballot" height="300"></ballot-chart>
-
-<div class="padding" style="padding-top: 30px;">
+<div class="results-card-button">
     <button class="button-royal button button-block" ng-click="action()">
         Next Poll <i class="icon ion-ios7-arrow-right" style="margin-left: 10px"></i>
     </button>
