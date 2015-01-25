@@ -1,5 +1,5 @@
 <div ng-controller="introController">
-    <div ng-if="!show_help">
+    <div ng-if="currentPage === pages.INTRO">
         <ion-content scroll="false">
             <div class="full-page">
                 <div class="intro-logo-container">
@@ -14,14 +14,14 @@
                         <p class="small">(We honestly have no idea who you are and will never know!)</p>
                     </div>
                     <div class="padding">
-                        <button class="button button-royal button-large button-block" ng-click="showHelp()">Continue
+                        <button class="button button-royal button-large button-block" ng-click="next()">Continue
                         </button>
                     </div>
                 </div>
             </div>
         </ion-content>
     </div>
-    <div ng-if="show_help">
+    <div ng-if="currentPage === pages.HELP">
         <ion-content scroll="false">
             <div class="full-page">
                 <div class="help-title">
@@ -61,24 +61,31 @@
                 </div>
                 <div class="help-answer-flag">
 
-                        <div class="center-table">
-                            <div class="poll-answer-item">
-                                <div class="poll-answer-button-flag">
-                                    <a class="poll-answer-button"><span
-                                            class="poll-answer-button-text icon ion-ios7-flag"></span></a>
-                                </div>
+                    <div class="center-table">
+                        <div class="poll-answer-item">
+                            <div class="poll-answer-button-flag">
+                                <a class="poll-answer-button"><span
+                                        class="poll-answer-button-text icon ion-ios7-flag"></span></a>
                             </div>
                         </div>
-                        <h5 class="text-center">Flag to report inappropriate content</h5>
+                    </div>
+                    <h5 class="text-center">Flag to report inappropriate content</h5>
 
                 </div>
                 <div class="help-footer">
-                    <button class="button button-block button-royal button-large" ng-click="finishIntro()">Start
-                        Voting
+                    <button class="button button-block button-royal button-large" ng-click="next()">Continue
                     </button>
                 </div>
 
             </div>
+        </ion-content>
+    </div>
+    <div ng-if="currentPage === pages.TERMS">
+        <ion-content>
+            Terms of Use
+
+            <button class="button button-block button-royal button-large" ng-click="next()">I Agree
+            </button>
         </ion-content>
     </div>
 </div>

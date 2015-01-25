@@ -40,6 +40,5 @@ BallotApp.controller('createBallotController', function ($scope, Ballot, $window
                 $state.go('my_ballots')
             })
         }
-
     }
 });

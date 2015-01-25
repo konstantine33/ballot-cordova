@@ -1,6 +1,7 @@
 <div class="poll-question-container">
     <div class="poll-question-content">
         <h2 class="poll-question">{{ballot.get('question')}}</h2>
+        <span class="poll-creator-username text-muted">Asked by: {{ballot.get('creatorUsername')}}</span>
     </div>
 </div>
 <div class="poll-answer-container">
@@ -31,5 +32,4 @@
             </div>
         </div>
     </div>
-
 </div>

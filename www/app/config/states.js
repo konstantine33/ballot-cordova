@@ -23,6 +23,11 @@ BallotApp    .config(function ($stateProvider, $urlRouterProvider) {
         .state('groups', {
             url: "/groups",
             templateUrl: "app/groups/groups.html"
+        })
+        .state('settings', {
+            url: "/settings",
+            templateUrl: "app/settings/settings.html",
+            controller: "settingsController"
         });
 
     // if none of the above states are matched, use this as the fallback

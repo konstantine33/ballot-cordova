@@ -1,8 +1,8 @@
-BallotApp.controller('appController', function ($state, Authenticate, $window, $ionicPlatform, $timeout, Account, $scope, $rootScope, BackButtonHack) {
+BallotApp.controller('appController', function ($state, Authenticate, $window, $ionicPlatform, $timeout, CurrentAccount, $scope, $rootScope, BackButtonHack) {
 
     $scope.backButtonControls = BackButtonHack.controls;
-    $scope.hasCheckedIntro = false;
-    $scope.isShowingIntro = false;
+    $scope.doneCheckingAccount = false;
+    $scope.showIntro = false;
 
     function hideSplash (){
         $ionicPlatform.ready(function(){
@@ -14,32 +14,33 @@ BallotApp.controller('appController', function ($state, Authenticate, $window, $
         });
     }
 
+
     function goToVote() {
-        $scope.isShowingIntro = false;
+        $scope.showIntro = false;
         $state.go('vote');
     }
 
-    $scope.viewIntro = function(){
-        $scope.isShowingIntro = true;
+    Authenticate()
+        .then(function () {
+            return CurrentAccount.init();
+        })
+        .then(function(){
+            hideSplash();
+            $scope.doneCheckingAccount = true;
+            if(CurrentAccount.get('viewedIntro') && CurrentAccount.get('agreedToTerms')){
+                goToVote();
+            }else {
+                $scope.goToIntro();
+            }
+        });
+
+
+    $scope.goToIntro = function(){
+        $scope.showIntro = true;
         var off = $rootScope.$on('finishedIntro', function(){
             goToVote();
             off();
         })
     };
-
-    Authenticate()
-        .then(function () {
-            hideSplash();
-            return Account.checkIfViewedIntro();
-        })
-        .then(function(viewedIntro){
-
-            $scope.hasCheckedIntro = true;
-            if(viewedIntro){
-                goToVote();
-            }else {
-                $scope.viewIntro()
-            }
-        })
 
 });

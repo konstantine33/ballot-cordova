@@ -26,6 +26,7 @@
 
     <ion-content scroll="false" ng-if="ballot" class="has-header">
         <div class="content-full padding">
+            <span class="poll-creator-username text-muted">Asked by: {{ballot.get('creatorUsername')}}</span>
             <ballot-chart ballot="ballot"></ballot-chart>
         </div>
     </ion-content>

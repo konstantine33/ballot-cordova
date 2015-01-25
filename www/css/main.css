@@ -96,6 +96,13 @@
     width: 100%;
     padding: 0 15px; }
 
+.poll-creator-username {
+  font-size: 10px;
+  top: 5px;
+  right: 10px;
+  position: absolute;
+  z-index: 10000; }
+
 .poll-answer-container {
   position: absolute;
   height: 125px;

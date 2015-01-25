@@ -42,7 +42,7 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
             var height = parseInt(scope.height, 10) || elem.parent()[0].offsetHeight - 20;
 
             //Adds the required elements, neg left margin is to account for removing vertical axis
-            var chart_elem = '<div ng-show="ballot.get(\'answer_count\')" id="' + id + '" style="padding-top: 5px; height:' + height + 'px;"></div>';
+            var chart_elem = '<div ng-show="ballot.get(\'answer_count\')" id="' + id + '" style="padding-top: 10px; height:' + height + 'px;"></div>';
             var no_responses = '<div ng-hide="ballot.get(\'answer_count\')"><h4 class="text-center padding-top">{{ballot.get("question")}}</h4><div style="height:' + (height - 150) +'px" class="vertical-center-parent"><h3 class="text-muted vertical-center text-center">There are no responses to this ballot.</h3></div></div>';
             elem.append($compile(no_responses)(scope));
             elem.append($compile(chart_elem)(scope));
