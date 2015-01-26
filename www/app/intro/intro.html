@@ -81,11 +81,31 @@
         </ion-content>
     </div>
     <div ng-if="currentPage === pages.TERMS">
-        <ion-content>
-            Terms of Use
+        <ion-content class="padding">
+            <h3 style="margin-top: 20px">Community Rules</h3>
+            <div ng-include="'app/intro/community-rules.html'"></div>
 
-            <button class="button button-block button-royal button-large" ng-click="next()">I Agree
-            </button>
+            <h3 style="margin-top: 20px" >Terms of Use</h3>
+            <ion-scroll class="card terms item item-text-wrap">
+                <div class="padding-vertical" ng-include="'app/intro/terms.html'"></div>
+            </ion-scroll>
+
+            <ul class="list" style="margin-top: 20px">
+                <li class="item item-checkbox">
+                    <label class="checkbox checkbox-balanced">
+                        <input type="checkbox" ng-model="agreedTo.community">
+                    </label>
+                    I have read and agree to abide by the community rules
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox checkbox-balanced">
+                        <input type="checkbox" ng-model="agreedTo.terms">
+                    </label>
+                    I have read and agree to abide by the Terms of Use
+                </li>
+            </ul>
+
+            <button class="button button-block button-royal button-large" ng-click="next()" ng-disabled="!agreedTo.terms || !agreedTo.community">Start Voting!</button>
         </ion-content>
     </div>
 </div>

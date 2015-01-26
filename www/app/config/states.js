@@ -1,4 +1,4 @@
-BallotApp    .config(function ($stateProvider, $urlRouterProvider) {
+BallotApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('vote', {
             url: "/vote",
@@ -28,6 +28,14 @@ BallotApp    .config(function ($stateProvider, $urlRouterProvider) {
             url: "/settings",
             templateUrl: "app/settings/settings.html",
             controller: "settingsController"
+        })
+        .state('rules', {
+            url: "/rules",
+            templateUrl: "app/rules/view-rules.html"
+        })
+        .state('terms', {
+            url: "/terms",
+            templateUrl: "app/rules/view-terms.html"
         });
 
     // if none of the above states are matched, use this as the fallback

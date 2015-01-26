@@ -295,3 +295,6 @@
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d; }
+
+.terms {
+  height: 200px; }

@@ -94,3 +94,7 @@ $help-answer-footer-height: 100%-$help-title-height - $help-answer-main-height -
   @include help-width();
   @include vertical-center-parent()
 }
+
+.terms {
+  height: 200px;
+}
