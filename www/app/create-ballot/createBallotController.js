@@ -37,7 +37,7 @@ BallotApp.controller('createBallotController', function ($scope, Ballot, $window
             var promise = Ballot.create($scope.form_data.question, $scope.form_data.left_answer, $scope.form_data.right_answer);
             BusyManager.manageRequest(promise, $scope.busy_id);
             promise.then(function (b) {
-                $state.go('my_ballots')
+                $state.go('vote')
             })
         }
     }
