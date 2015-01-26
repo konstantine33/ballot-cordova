@@ -1,7 +1,7 @@
 <ion-view>
     <ion-nav-buttons side="right">
-        <button type="submit" class="button button-clear button-royal" ng-click="save($event)"
-                busy-button="Saving..." busy-id="busy_id">Save</button>
+        <button class="button button-royal button-clear icon ion-plus-circled" ui-sref="create_ballot">
+        </button>
     </ion-nav-buttons>
     <ion-content>
         <div class="bar bar-header bar-assertive item" ng-show="form_data.error">
@@ -9,11 +9,15 @@
         </div>
         <form>
             <div class="list">
-                <label class="item item-input">
-                    <span class="input-label">Username <small>({{maxUsernameLength -
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label text-muted">Username <small>({{maxUsernameLength -
                         form_data.username.length}})</small></span>
                     <input type="text" b-maxlength="maxUsernameLength" ng-model="form_data.username">
                 </label>
+            </div>
+            <div class="padding">
+            <button type="submit" class="button button-block button-royal" ng-click="save($event)"
+                    busy-button="Saving..." busy-id="busy_id">Save</button>
             </div>
         </form>
     </ion-content>
