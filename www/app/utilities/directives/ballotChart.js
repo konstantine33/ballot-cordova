@@ -51,7 +51,7 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
             var dps = new ChartDataPoints();
             dps.updateData(scope.ballot);
             var chartYMaximum = function(){
-                return Math.max(scope.ballot.getAnswerPercent(RESPONSE.RIGHT, true),scope.ballot.getAnswerPercent(RESPONSE.LEFT, true)) + 5;
+                return Math.max(scope.ballot.getAnswerPercent(RESPONSE.RIGHT, true),scope.ballot.getAnswerPercent(RESPONSE.LEFT, true)) + 7;
             };
 
             var updateChart = function () {
