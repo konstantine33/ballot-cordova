@@ -93,19 +93,13 @@
             <ul class="list" style="margin-top: 20px">
                 <li class="item item-checkbox item-text-wrap">
                     <label class="checkbox checkbox-balanced">
-                        <input type="checkbox" ng-model="agreedTo.community">
-                    </label>
-                    <span>I have read and agree to abide by the Community Rules</span>
-                </li>
-                <li class="item item-checkbox item-text-wrap">
-                    <label class="checkbox checkbox-balanced">
                         <input type="checkbox" ng-model="agreedTo.terms">
                     </label>
-                    <span>I have read and agree to abide by the Terms of Use</span>
+                    <span>I have read and agree to abide by the <strong>Community Rules</strong> and <strong>Terms of Use</strong></span>
                 </li>
             </ul>
 
-            <button class="button button-block button-royal button-large" ng-click="next()" ng-disabled="!agreedTo.terms || !agreedTo.community">Start Voting!</button>
+            <button class="button button-block button-royal button-large" ng-click="next()" ng-disabled="!agreedTo.terms">Start Voting!</button>
         </ion-content>
     </div>
 </div>

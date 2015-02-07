@@ -10,6 +10,22 @@
   font-size: .9em;
 }
 
+.text-large {
+  font-size: 1.1em;
+}
+
+.text-xlarge {
+  font-size: 1.25em;
+}
+
+.text-xxlarge {
+  font-size: 1.4em;
+}
+
+.text-royal {
+  color: $royal;
+}
+
 //Sets up container for a full page
 //Must be used with <ion-content scroll=false>
 .content-full {
@@ -88,4 +104,8 @@
 
 .prevent-ghost-click {
   pointer-events: none;
+}
+
+.on-top {
+  z-index: 999999;
 }

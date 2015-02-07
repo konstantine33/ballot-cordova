@@ -7,6 +7,18 @@
 .text-small {
   font-size: 0.9em; }
 
+.text-large {
+  font-size: 1.1em; }
+
+.text-xlarge {
+  font-size: 1.25em; }
+
+.text-xxlarge {
+  font-size: 1.4em; }
+
+.text-royal {
+  color: #663399; }
+
 .content-full {
   height: 100%;
   position: relative; }
@@ -58,6 +70,9 @@
 
 .prevent-ghost-click {
   pointer-events: none; }
+
+.on-top {
+  z-index: 999999; }
 
 .card-stack {
   position: absolute;
@@ -167,9 +182,9 @@
       background-color: #832f13; }
 
 .poll-answer-button-skip {
-  width: 54px;
-  height: 54px;
-  margin: 5px auto 10px; }
+  width: 58.5px;
+  height: 58.5px;
+  margin: 5px auto 20px; }
   .poll-answer-button-skip .poll-answer-button {
     color: #444;
     font-size: 14px;
@@ -179,8 +194,8 @@
       background-color: #d2d2d2; }
 
 .poll-answer-button-flag {
-  width: 27px;
-  height: 27px;
+  width: 22.5px;
+  height: 22.5px;
   margin: 0 auto; }
   .poll-answer-button-flag .poll-answer-button {
     color: #ef473a;

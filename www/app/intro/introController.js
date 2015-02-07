@@ -1,7 +1,6 @@
 BallotApp.controller('introController', function ($scope, CurrentAccount, $state, $rootScope) {
 
     $scope.agreedTo = {
-        community: false,
         terms: false
     };
 
@@ -53,7 +52,7 @@ BallotApp.controller('introController', function ($scope, CurrentAccount, $state
                 return $scope.currentPage = $scope.pages.TERMS;
 
             case $scope.pages.TERMS:
-                if($scope.agreedTo.terms && $scope.agreedTo.community){
+                if($scope.agreedTo.terms){
                     return finishIntro();
                 }
         }

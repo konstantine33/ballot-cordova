@@ -1,3 +1,7 @@
+/**
+ * Note: Cached statistics should not be replied upon for accuracy because this model is not synced with server
+ */
+
 BallotApp.factory('CurrentAccount', function (SERVER_URL, Request) {
     var url =  SERVER_URL + "/current-account";
     var currentAccount = new CurrentAccount();
@@ -36,6 +40,13 @@ BallotApp.factory('CurrentAccount', function (SERVER_URL, Request) {
 
     CurrentAccount.prototype.updateUsername = function(username){
         return this.update({username: username})
+    };
+
+    CurrentAccount.prototype.shouldDisplayAddQuestionPrompt = function(){
+        return !this.get('viewedAddQuestionPrompt')
+    };
+    CurrentAccount.prototype.hasViewedAddQuestionPrompt = function(){
+        return this.update({viewedAddQuestionPrompt: true})
     };
 
     return currentAccount

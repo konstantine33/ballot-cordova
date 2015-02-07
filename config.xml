@@ -43,8 +43,7 @@
     <platform name="ios">
         <!-- iOS 8.0+ -->
         <!-- iPhone 6 Plus  -->
-
-        <!--<icon src="res/ios/icon-60@3x.png" width="180" height="180" />-->
+        <icon src="assets/iOS/Resources/icons/Icon-60@3x.png" width="180" height="180" />
 
         <!-- iOS 7.0+ -->
         <!-- iPhone / iPod Touch  -->

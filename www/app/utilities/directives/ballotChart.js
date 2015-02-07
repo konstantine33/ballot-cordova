@@ -50,7 +50,9 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
             var chart;
             var dps = new ChartDataPoints();
             dps.updateData(scope.ballot);
-
+            var chartYMaximum = function(){
+                return Math.max(scope.ballot.getAnswerPercent(RESPONSE.RIGHT, true),scope.ballot.getAnswerPercent(RESPONSE.LEFT, true)) + 5;
+            };
 
             var updateChart = function () {
                 scope.ballot.refresh()
@@ -59,6 +61,8 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
 
                         //Only render if the chart has been created - ie after there are responses
                         if (chart) {
+                            //A hack into chart's options to update the chartY scale
+                            chart.options.axisY.maximum = chartYMaximum();
                             chart.render();
                         }
                     })
@@ -95,10 +99,8 @@ BallotApp.directive('ballotChart', function ($window, $compile, $interval, Ballo
                                 margin: 2,
                                 labelMaxWidth: 0,
                                 labelFontSize: 1,
-                                tickLength: 1
-
-
-
+                                tickLength: 1,
+                                maximum: chartYMaximum()
                             },
                             axisX: {
                                 tickThickness: 0,

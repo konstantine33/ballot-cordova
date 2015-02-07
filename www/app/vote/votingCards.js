@@ -1,4 +1,4 @@
-BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $window, VotingManager, $interval) {
+BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $window, VotingManager, $interval, CurrentAccount, AnswerQuestionPrompt) {
     var voting_card_template = '<li voting-card class="vote-card"></li>';
     var results_card_template = '<li results-card class="vote-card"></li>';
 
@@ -35,11 +35,13 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
             scope.ballots = [];
             scope.current_card = null;
             scope.responseType = Ballot.responseType;
+            scope.respondedInSession = 0;
+
             var recurring_emitter = new RecurringEmitter();
             var list_parent = elem.find('ul');
             var stack = $window.gajus.Swing.Stack({
                 isThrowOut: function (offset, element, confidence) {
-                    return confidence > 0.45
+                    return confidence > 0.3
                 },
                 throwOutDistance: function () {
                     return $window.innerWidth * 1.5;
@@ -127,6 +129,16 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
                     this.ballot.respond(response).finally(function(){
                         VotingManager.removePending(self.ballot.getId());
                     });
+
+                    ////////// Display add question prompt if its has not been displayed before & respondedInSession === 4
+                    // I am making this === and not > in case server hasn't responded by next time a question is responded to
+                    scope.respondedInSession ++;
+                    if(scope.respondedInSession === 4 && CurrentAccount.shouldDisplayAddQuestionPrompt()){
+                        AnswerQuestionPrompt.show();
+                        CurrentAccount.hasViewedAddQuestionPrompt()
+                    }
+                    ///////////
+
 
                     if(response === Ballot.responseType.SKIP || response === Ballot.responseType.FLAG){
                         setNewVotingCard();

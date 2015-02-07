@@ -21,5 +21,4 @@ BallotApp.controller('voteController', function ($scope, Ballot, $rootScope, Loc
     $scope.$on("$destroy", function () {
         off();
     });
-
 });
