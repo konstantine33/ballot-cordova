@@ -83,8 +83,6 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
             };
 
             scope.$on('nextCard', function(event, args){
-                console.log("RECEIVED")
-
                 event.stopPropagation()
                 ////////// Display add question prompt if its has not been displayed before & respondedInSession === 4
                 // I am making this === and not > in case server hasn't responded by next time a question is responded to
@@ -141,7 +139,7 @@ BallotApp.directive('votingCard', function (VotingManager, Ballot) {
 
                 var nextCard = response === Ballot.responseType.SKIP || response === Ballot.responseType.FLAG ? "ballotCard" : "resultsCard"
 
-                scope.$broadcast("nextCard", {card: nextCard})
+                scope.$emit("nextCard", {card: nextCard})
             }
         }
     }
@@ -153,7 +151,7 @@ BallotApp.directive('resultsCard', function () {
         link: function (scope, elem, attr) {
 
             scope.action = function () {
-                scope.$broadcast("nextCard", {card: "ballotCard"})
+                scope.$emit("nextCard", {card: "ballotCard"})
             }
         }
     }
