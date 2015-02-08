@@ -76,40 +76,41 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
 
             //////////////// Voting Card Behavior
 
-            var makeCard = function (ballot, card_template, next) {
+            var makeCard = function (ballot, card_template) {
                 var newScope = scope.$new();
                 newScope.ballot = ballot;
-                newScope.next = next;
                 return $compile(card_template)(newScope);
             };
 
+            scope.$on('nextCard', function(event, args){
+                console.log("RECEIVED")
+
+                event.stopPropagation()
+                ////////// Display add question prompt if its has not been displayed before & respondedInSession === 4
+                // I am making this === and not > in case server hasn't responded by next time a question is responded to
+                scope.respondedInSession++;
+                if (scope.respondedInSession === 4 && CurrentAccount.shouldDisplayAddQuestionPrompt()) {
+                    AnswerQuestionPrompt.show();
+                    CurrentAccount.hasViewedAddQuestionPrompt()
+                }
+
+                if (args.card === "ballotCard") {
+                    setNewVotingCard();
+                } else {
+                    setNewResultsCard();
+                }
+            });
+
             function setNewVotingCard() {
                 if (scope.current_card) {
+                    scope.current_card.scope().$destroy();
                     scope.current_card.remove();
                     delete scope.current_ballot;
                 }
 
-                var next = function (response) {
-                    ////////// Display add question prompt if its has not been displayed before & respondedInSession === 4
-                    // I am making this === and not > in case server hasn't responded by next time a question is responded to
-                    scope.respondedInSession++;
-                    if (scope.respondedInSession === 4 && CurrentAccount.shouldDisplayAddQuestionPrompt()) {
-                        AnswerQuestionPrompt.show();
-                        CurrentAccount.hasViewedAddQuestionPrompt()
-                    }
-                    ///////////
-
-
-                    if (response === Ballot.responseType.SKIP || response === Ballot.responseType.FLAG) {
-                        setNewVotingCard();
-                    } else {
-                        setNewResultsCard();
-                    }
-                };
-
                 if (scope.ballots.length) {
                     scope.current_ballot = scope.ballots.shift();
-                    scope.current_card = makeCard(scope.current_ballot, voting_card_template, next);
+                    scope.current_card = makeCard(scope.current_ballot, voting_card_template);
                     list_parent.append(scope.current_card);
                 }
 
@@ -118,27 +119,18 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
                     $rootScope.$emit(scope.getBallotsEvent)
                 }
 
-                //Speeds up the digest cycle.
-                //if(!scope.$$phase && !scope.$root.$$phase){
-                //    scope.$apply();
-                //}
-
             }
 
             function setNewResultsCard() {
-                var actionFnc = function () {
-                    setNewVotingCard();
-                };
-
                 scope.current_card.remove();
-                scope.current_card = makeCard(scope.current_ballot, results_card_template, actionFnc);
+                scope.current_card = makeCard(scope.current_ballot, results_card_template);
                 list_parent.append(scope.current_card);
             }
         }
     }
 });
 
-BallotApp.directive('votingCard', function (VotingManager) {
+BallotApp.directive('votingCard', function (VotingManager, Ballot) {
     return {
         templateUrl: 'app/vote/voteCard.html',
         link: function (scope, elem, attr) {
@@ -147,9 +139,9 @@ BallotApp.directive('votingCard', function (VotingManager) {
                     VotingManager.removePending(scope.ballot.getId());
                 });
 
-                if (angular.isFunction(scope.next)) {
-                    scope.next(response)
-                }
+                var nextCard = response === Ballot.responseType.SKIP || response === Ballot.responseType.FLAG ? "ballotCard" : "resultsCard"
+
+                scope.$broadcast("nextCard", {card: nextCard})
             }
         }
     }
@@ -161,9 +153,7 @@ BallotApp.directive('resultsCard', function () {
         link: function (scope, elem, attr) {
 
             scope.action = function () {
-                if (angular.isFunction(scope.next)) {
-                    scope.next()
-                }
+                scope.$broadcast("nextCard", {card: "ballotCard"})
             }
         }
     }
