@@ -91,65 +91,84 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
 
             //////////////// Voting Card Behavior
 
-            function VotingCard(ballot, card_template, stack, actionFnc) {
-                var self = this;
-                this.ballot = ballot;
-                this.action = function () {
-                    actionFnc.apply(self, arguments)
-                };
-
+            var makeCard = function(ballot, card_template, stack, action){
                 var newScope = scope.$new();
                 newScope.ballot = ballot;
-                newScope.action = function (response) {
-                    self.action(response);
+                newScope.action = action;
+                var element = $compile(card_template)(newScope);
+                //var card = stack.createCard(element[0]);
+
+                return {
+                    card: {},
+                    elem: element
                 };
-
-                this.scope = newScope;
-                this.elem = $compile(card_template)(newScope);
-                this.card = stack.createCard(this.elem[0]);
-            }
-
-            VotingCard.prototype.attach = function (parent) {
-                parent.append(this.elem)
             };
-            VotingCard.prototype.destroy = function () {
-                this.card.destroy();
-                this.elem.remove();
-                this.scope.$destroy(); // For some reason elem.remove() is not destroying the scope.. So we will destroy it manually otherwise there'll be a memory leak
-            };
+
+            //function VotingCard(ballot, card_template, stack, actionFnc) {
+            //    var self = this;
+            //    this.ballot = ballot;
+            //
+            //    var newScope = scope.$new();
+            //    newScope.ballot = ballot;
+            //    newScope.action = function (response) {
+            //        actionFnc.apply(null, arguments)
+            //    };
+            //
+            //    this.scope = newScope;
+            //    this.elem = $compile(card_template)(newScope);
+            //    this.card = stack.createCard(this.elem[0]);
+            //}
+            //
+            //VotingCard.prototype.attach = function (parent) {
+            //    parent.append(this.elem)
+            //};
+            //VotingCard.prototype.destroy = function () {
+            //    this.card.destroy();
+            //    this.elem.remove();
+            //    this.scope.$destroy(); // For some reason elem.remove() is not destroying the scope.. So we will destroy it manually otherwise there'll be a memory leak
+            //    this.card = null;
+            //    this.elem = null;
+            //    this.scope = null;
+            //};
 
             function setNewVotingCard() {
                 if (scope.current_card) {
-                    scope.current_card.destroy();
+                    scope.current_card_elem.scope().$destroy();
+                    scope.current_card_elem.remove();
+                    //scope.current_card.destroy();
                     scope.current_card = null;
+                    scope.current_card_elem = null;
                 }
 
                 var actionFnc = function (response) {
-                    var self = this;
-                    this.ballot.respond(response).finally(function(){
-                        VotingManager.removePending(self.ballot.getId());
-                    });
-
-                    ////////// Display add question prompt if its has not been displayed before & respondedInSession === 4
-                    // I am making this === and not > in case server hasn't responded by next time a question is responded to
-                    scope.respondedInSession ++;
-                    if(scope.respondedInSession === 4 && CurrentAccount.shouldDisplayAddQuestionPrompt()){
-                        AnswerQuestionPrompt.show();
-                        CurrentAccount.hasViewedAddQuestionPrompt()
-                    }
-                    ///////////
-
-
-                    if(response === Ballot.responseType.SKIP || response === Ballot.responseType.FLAG){
-                        setNewVotingCard();
-                    }else {
-                        setNewResultsCard();
-                    }
+                    //var self = this;
+                    //this.ballot.respond(response).finally(function(){
+                    //    VotingManager.removePending(self.ballot.getId());
+                    //});
+                    //
+                    //////////// Display add question prompt if its has not been displayed before & respondedInSession === 4
+                    //// I am making this === and not > in case server hasn't responded by next time a question is responded to
+                    //scope.respondedInSession ++;
+                    //if(scope.respondedInSession === 4 && CurrentAccount.shouldDisplayAddQuestionPrompt()){
+                    //    AnswerQuestionPrompt.show();
+                    //    CurrentAccount.hasViewedAddQuestionPrompt()
+                    //}
+                    /////////////
+                    //
+                    //
+                    //if(response === Ballot.responseType.SKIP || response === Ballot.responseType.FLAG){
+                    //    setNewVotingCard();
+                    //}else {
+                    //    setNewResultsCard();
+                    //}
+                    setNewVotingCard()
                 };
 
                 if (scope.ballots.length) {
-                    scope.current_card = new VotingCard(scope.ballots.shift(), voting_card_template, stack, actionFnc);
-                    scope.current_card.attach(list_parent);
+                    var card = makeCard(scope.ballots.shift(), voting_card_template, stack, actionFnc);
+                    scope.current_card = card.card;
+                    scope.current_card_elem = card.elem;
+                    list_parent.append(scope.current_card_elem);
                 }
 
                 //load more ballots if there are less than 2 ballots in the cache
@@ -164,15 +183,15 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
 
             }
 
-            function setNewResultsCard() {
-                var actionFnc = function () {
-                    setNewVotingCard();
-                };
-
-                scope.current_card.destroy();
-                scope.current_card = new VotingCard(scope.current_card.ballot, results_card_template, stack, actionFnc);
-                scope.current_card.attach(list_parent);
-            }
+            //function setNewResultsCard() {
+            //    var actionFnc = function () {
+            //        setNewVotingCard();
+            //    };
+            //
+            //    scope.current_card.destroy();
+            //    scope.current_card = new VotingCard(scope.current_card.ballot, results_card_template, stack, actionFnc);
+            //    scope.current_card.attach(list_parent);
+            //}
         }
     }
 });
