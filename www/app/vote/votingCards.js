@@ -1,5 +1,5 @@
 BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $window, VotingManager, $interval, CurrentAccount, AnswerQuestionPrompt) {
-    var voting_card_template = '<li voting-card class="vote-card" ng-if="!!ballot && currentView === \'voting\'"></li>';
+    var voting_card_template = '<li voting-card class="vote-card" ng-show="!!ballot && currentView === \'voting\'"></li>';
     var results_card_template = '<li results-card class="vote-card" ng-if="!!ballot && currentView === \'results\'"></li>';
 
     function RecurringEmitter() {
@@ -143,7 +143,6 @@ BallotApp.directive('resultsCard', function () {
     return {
         templateUrl: 'app/vote/resultsCard.html',
         link: function (scope, elem, attr) {
-
             scope.action = function () {
                 scope.$emit("nextCard", {nextView: "voting"})
             }
