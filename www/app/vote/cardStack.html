@@ -1,7 +1,7 @@
 <div class="content-full">
-    <ul ng-show="loaded" class="card-stack">
+    <ul ng-hide="currentView === 'loading'" class="card-stack">
         <li class="vote-card">
-            <div class="vertical-center-parent padding safe-height" ng-hide="!!current_card">
+            <div class="vertical-center-parent padding safe-height" ng-hide="!!ballot">
                 <div class="vertical-center text-center">
                     <h3 class="text-muted">There are currently no more polls for you to vote on.</h3>
 
@@ -11,11 +11,10 @@
                     </button>
                 </div>
             </div>
-
         </li>
     </ul>
 
-    <div ng-hide="loaded" class="vertical-center-parent safe-height">
+    <div ng-show="currentView === 'loading'" class="vertical-center-parent safe-height">
         <div class="vertical-center text-center" style="font-size: 30px;">
             <i class="icon ion-loading-b"></i> Loading...
         </div>

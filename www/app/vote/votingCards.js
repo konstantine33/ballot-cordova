@@ -1,6 +1,6 @@
 BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $window, VotingManager, $interval, CurrentAccount, AnswerQuestionPrompt) {
-    var voting_card_template = '<li voting-card class="vote-card"></li>';
-    var results_card_template = '<li results-card class="vote-card"></li>';
+    var voting_card_template = '<li voting-card class="vote-card" ng-if="!!ballot && currentView === \'voting\'"></li>';
+    var results_card_template = '<li results-card class="vote-card" ng-if="!!ballot && currentView === \'results\'"></li>';
 
     function RecurringEmitter() {
         this.off = null;
@@ -31,14 +31,23 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
         replace: true,
         restrict: "AE",
         link: function (scope, elem, attr) {
-            scope.loaded = false;
             scope.ballots = [];
-            scope.current_card = null;
+            scope.ballot = null;
+            scope.currentView = "loading";
             scope.responseType = Ballot.responseType;
             scope.respondedInSession = 0;
 
             var recurring_emitter = new RecurringEmitter();
             var list_parent = elem.find('ul');
+
+            var votingCardScope = scope.$new();
+            var votingCard = $compile(voting_card_template)(votingCardScope);
+
+            var resultsCardScope = scope.$new();
+            var resultsCard = $compile(results_card_template)(resultsCardScope);
+
+            list_parent.append(votingCard);
+            list_parent.append(resultsCard);
 
             //Receives new data
             var off = $rootScope.$on(scope.newBallotsEvent, function (event, args) {
@@ -49,15 +58,13 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
                     }
                 });
 
-                scope.loaded = true;
-
                 //sets a new card if there isnt a current card and there are available cards to set
-                if (!scope.current_card && scope.ballots.length) {
+                if (!scope.ballot && scope.ballots.length) {
                     setNewVotingCard()
                 }
 
                 //if there isn't a current card and there are no new cards, then start trying to retrieve cards
-                else if (!scope.current_card && !scope.ballots.length) {
+                else if (!scope.ballot && !scope.ballots.length) {
                     recurring_emitter.emit(scope.getBallotsEvent);
                 }
 
@@ -76,14 +83,8 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
 
             //////////////// Voting Card Behavior
 
-            var makeCard = function (ballot, card_template) {
-                var newScope = scope.$new();
-                newScope.ballot = ballot;
-                return $compile(card_template)(newScope);
-            };
-
             scope.$on('nextCard', function(event, args){
-                event.stopPropagation()
+                event.stopPropagation();
                 ////////// Display add question prompt if its has not been displayed before & respondedInSession === 4
                 // I am making this === and not > in case server hasn't responded by next time a question is responded to
                 scope.respondedInSession++;
@@ -92,7 +93,7 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
                     CurrentAccount.hasViewedAddQuestionPrompt()
                 }
 
-                if (args.card === "ballotCard") {
+                if (args.nextView === "voting") {
                     setNewVotingCard();
                 } else {
                     setNewResultsCard();
@@ -100,16 +101,11 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
             });
 
             function setNewVotingCard() {
-                if (scope.current_card) {
-                    scope.current_card.scope().$destroy();
-                    scope.current_card.remove();
-                    delete scope.current_ballot;
-                }
-
+                scope.currentView = "voting";
                 if (scope.ballots.length) {
-                    scope.current_ballot = scope.ballots.shift();
-                    scope.current_card = makeCard(scope.current_ballot, voting_card_template);
-                    list_parent.append(scope.current_card);
+                    scope.ballot = scope.ballots.shift();
+                }else {
+                    scope.ballot = null;
                 }
 
                 //load more ballots if there are less than 2 ballots in the cache
@@ -120,9 +116,7 @@ BallotApp.directive('votingCards', function ($compile, $rootScope, Ballot, $wind
             }
 
             function setNewResultsCard() {
-                scope.current_card.remove();
-                scope.current_card = makeCard(scope.current_ballot, results_card_template);
-                list_parent.append(scope.current_card);
+                scope.currentView = "results";
             }
         }
     }
@@ -137,9 +131,9 @@ BallotApp.directive('votingCard', function (VotingManager, Ballot) {
                     VotingManager.removePending(scope.ballot.getId());
                 });
 
-                var nextCard = response === Ballot.responseType.SKIP || response === Ballot.responseType.FLAG ? "ballotCard" : "resultsCard"
+                var nextView = response === Ballot.responseType.SKIP || response === Ballot.responseType.FLAG ? "voting" : "results";
 
-                scope.$emit("nextCard", {card: nextCard})
+                scope.$emit("nextCard", {nextView: nextView})
             }
         }
     }
@@ -151,7 +145,7 @@ BallotApp.directive('resultsCard', function () {
         link: function (scope, elem, attr) {
 
             scope.action = function () {
-                scope.$emit("nextCard", {card: "ballotCard"})
+                scope.$emit("nextCard", {nextView: "voting"})
             }
         }
     }
